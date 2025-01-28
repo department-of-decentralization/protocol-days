@@ -8,7 +8,7 @@ export default function Home() {
 
         <h1 className="text-4xl sm:text-5xl font-bold text-white">Berlin Blockchain Week 2025</h1>
 
-        <h2 className="text-2xl text-orange-400 font-semibold -mt-4">June 8-22</h2>
+        <h2 className="text-2xl text-primary-500 font-semibold -mt-4">June 8-22</h2>
 
         <div className="space-y-4">
           <p className="text-xl text-gray-300">Coming Soon to Berlin</p>
@@ -20,7 +20,7 @@ export default function Home() {
           href="https://baserow.io/form/m5If36R8jLWDU8eBM8LBxA22QFjwFRQtERzwnpS_-5I"
           target="_blank"
           rel="noopener noreferrer"
-          className="px-8 py-4 bg-orange-500 rounded-lg text-white font-semibold hover:opacity-90 transition-opacity animate-pulse"
+          className="px-8 py-4 bg-primary-500 rounded-lg text-white font-semibold hover:opacity-90 transition-opacity"
         >
           Submit Your Event
         </a>
