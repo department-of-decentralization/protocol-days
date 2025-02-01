@@ -17,7 +17,7 @@ export default function Home() {
         <div className="text-sm text-gray-400">Are you organizing an event? Submit it now!</div>
 
         <a
-          href="https://baserow.io/form/m5If36R8jLWDU8eBM8LBxA22QFjwFRQtERzwnpS_-5I"
+          href="https://forms.fillout.com/t/6zcH1pfc4ius"
           target="_blank"
           rel="noopener noreferrer"
           className="px-8 py-4 bg-primary-500 rounded-lg text-white font-semibold hover:opacity-90 transition-opacity"
