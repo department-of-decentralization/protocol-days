@@ -1,0 +1,446 @@
+{
+  "responses": [
+    {
+      "submissionId": "clqnzm9hi0000356mpat3d6f1",
+      "submissionTime": "2023-12-20T12:00:00Z",
+      "questions": [
+        {
+          "id": "name",
+          "name": "Event Name",
+          "type": "text",
+          "value": "ETH Berlin Summit"
+        },
+        {
+          "id": "fckv",
+          "name": "Event Type",
+          "type": "multiselect",
+          "value": ["Conference", "Meetup"]
+        },
+        {
+          "id": "date",
+          "name": "Event Start Date",
+          "type": "date",
+          "value": "2025-06-10"
+        },
+        {
+          "id": "days",
+          "name": "Number of Days",
+          "type": "number",
+          "value": 2
+        },
+        {
+          "id": "desc",
+          "name": "Event Description",
+          "type": "longtext",
+          "value": "Join us for the largest Ethereum conference in Berlin! Two days of technical talks, workshops, and networking with the leading minds in blockchain technology. From Layer 2 scaling solutions to the latest in DeFi, we'll cover the cutting-edge developments in the Ethereum ecosystem."
+        },
+        {
+          "id": "org",
+          "name": "Organizer Name",
+          "type": "text",
+          "value": "ETH Berlin DAO"
+        },
+        {
+          "id": "venue",
+          "name": "Venue Name",
+          "type": "text",
+          "value": "STATION Berlin"
+        },
+        {
+          "id": "address",
+          "name": "Venue Address",
+          "type": "text",
+          "value": "Luckenwalder Str. 4-6, 10963 Berlin, Germany"
+        },
+        {
+          "id": "venuelink",
+          "name": "Venue Link",
+          "type": "url",
+          "value": "https://station-berlin.de"
+        },
+        {
+          "id": "eventlink",
+          "name": "Event Link/Website",
+          "type": "url",
+          "value": "https://ethberlin.org"
+        },
+        {
+          "id": "logo",
+          "name": "Logo",
+          "type": "file",
+          "value": [
+            {
+              "url": "https://picsum.photos/seed/ethberlin/200",
+              "filename": "eth-berlin-logo.jpg"
+            }
+          ]
+        },
+        {
+          "id": "day1start",
+          "name": "Day 1 - Start Time",
+          "type": "time",
+          "value": "09:00"
+        },
+        {
+          "id": "day1end",
+          "name": "Day 1 - End Time",
+          "type": "time",
+          "value": "18:00"
+        },
+        {
+          "id": "day2start",
+          "name": "Day 2 - Start Time",
+          "type": "time",
+          "value": "09:00"
+        },
+        {
+          "id": "day2end",
+          "name": "Day 2 - End Time",
+          "type": "time",
+          "value": "17:00"
+        }
+      ]
+    },
+    {
+      "submissionId": "clqnzm9hi0001356mpat3d6f2",
+      "submissionTime": "2023-12-20T13:00:00Z",
+      "questions": [
+        {
+          "id": "name",
+          "name": "Event Name",
+          "type": "text",
+          "value": "ZK Hack Berlin"
+        },
+        {
+          "id": "fckv",
+          "name": "Event Type",
+          "type": "multiselect",
+          "value": ["Hackathon", "Conference"]
+        },
+        {
+          "id": "date",
+          "name": "Event Start Date",
+          "type": "date",
+          "value": "2025-06-14"
+        },
+        {
+          "id": "days",
+          "name": "Number of Days",
+          "type": "number",
+          "value": 3
+        },
+        {
+          "id": "desc",
+          "name": "Event Description",
+          "type": "longtext",
+          "value": "ZK Hack Berlin brings together the brightest minds in zero-knowledge proofs for a three-day hackathon and conference. Build the future of privacy-preserving applications, learn from ZK experts, and compete for prizes worth up to $50,000 in the most innovative ZK hackathon in Europe."
+        },
+        {
+          "id": "org",
+          "name": "Organizer Name",
+          "type": "text",
+          "value": "ZK Foundation"
+        },
+        {
+          "id": "venue",
+          "name": "Venue Name",
+          "type": "text",
+          "value": "Factory Berlin Görlitzer Park"
+        },
+        {
+          "id": "address",
+          "name": "Venue Address",
+          "type": "text",
+          "value": "Lohmühlenstraße 65, 12435 Berlin, Germany"
+        },
+        {
+          "id": "venuelink",
+          "name": "Venue Link",
+          "type": "url",
+          "value": "https://factoryberlin.com"
+        },
+        {
+          "id": "eventlink",
+          "name": "Event Link/Website",
+          "type": "url",
+          "value": "https://zkhack.berlin"
+        },
+        {
+          "id": "logo",
+          "name": "Logo",
+          "type": "file",
+          "value": [
+            {
+              "url": "https://picsum.photos/seed/zkhack/200",
+              "filename": "zk-hack-logo.jpg"
+            }
+          ]
+        },
+        {
+          "id": "day1start",
+          "name": "Day 1 - Start Time",
+          "type": "time",
+          "value": "10:00"
+        },
+        {
+          "id": "day1end",
+          "name": "Day 1 - End Time",
+          "type": "time",
+          "value": "22:00"
+        },
+        {
+          "id": "day2start",
+          "name": "Day 2 - Start Time",
+          "type": "time",
+          "value": "09:00"
+        },
+        {
+          "id": "day2end",
+          "name": "Day 2 - End Time",
+          "type": "time",
+          "value": "23:00"
+        },
+        {
+          "id": "day3start",
+          "name": "Day 3 - Start Time",
+          "type": "time",
+          "value": "09:00"
+        },
+        {
+          "id": "day3end",
+          "name": "Day 3 - End Time",
+          "type": "time",
+          "value": "18:00"
+        }
+      ]
+    },
+    {
+      "submissionId": "clqnzm9hi0002356mpat3d6f3",
+      "submissionTime": "2023-12-20T14:00:00Z",
+      "questions": [
+        {
+          "id": "name",
+          "name": "Event Name",
+          "type": "text",
+          "value": "DeFi Happy Hour"
+        },
+        {
+          "id": "fckv",
+          "name": "Event Type",
+          "type": "multiselect",
+          "value": ["Happy Hour", "Meetup", "Party"]
+        },
+        {
+          "id": "date",
+          "name": "Event Start Date",
+          "type": "date",
+          "value": "2025-06-12"
+        },
+        {
+          "id": "days",
+          "name": "Number of Days",
+          "type": "number",
+          "value": 1
+        },
+        {
+          "id": "desc",
+          "name": "Event Description",
+          "type": "longtext",
+          "value": "Network with DeFi enthusiasts over craft cocktails! Join us for an evening of engaging discussions about the future of decentralized finance. Connect with founders, developers, and investors in Berlin's vibrant crypto scene. Special guest appearances from leading DeFi protocols."
+        },
+        {
+          "id": "org",
+          "name": "Organizer Name",
+          "type": "text",
+          "value": "DeFi Berlin Community"
+        },
+        {
+          "id": "venue",
+          "name": "Venue Name",
+          "type": "text",
+          "value": "Soho House Berlin"
+        },
+        {
+          "id": "address",
+          "name": "Venue Address",
+          "type": "text",
+          "value": "Torstraße 1, 10119 Berlin, Germany"
+        },
+        {
+          "id": "venuelink",
+          "name": "Venue Link",
+          "type": "url",
+          "value": "https://www.sohohouse.com/houses/soho-house-berlin"
+        },
+        {
+          "id": "eventlink",
+          "name": "Event Link/Website",
+          "type": "url",
+          "value": "https://lu.ma/defihappyhour-berlin"
+        },
+        {
+          "id": "logo",
+          "name": "Logo",
+          "type": "file",
+          "value": [
+            {
+              "url": "https://picsum.photos/seed/defihh/200",
+              "filename": "defi-happy-hour-logo.jpg"
+            }
+          ]
+        },
+        {
+          "id": "day1start",
+          "name": "Day 1 - Start Time",
+          "type": "time",
+          "value": "18:00"
+        },
+        {
+          "id": "day1end",
+          "name": "Day 1 - End Time",
+          "type": "time",
+          "value": "23:00"
+        }
+      ]
+    },
+    {
+      "submissionId": "clqnzm9hi0003356mpat3d6f4",
+      "submissionTime": "2023-12-20T15:00:00Z",
+      "questions": [
+        {
+          "id": "name",
+          "name": "Event Name",
+          "type": "text",
+          "value": "Web3 Builders Space"
+        },
+        {
+          "id": "fckv",
+          "name": "Event Type",
+          "type": "multiselect",
+          "value": ["Coworking", "Meetup"]
+        },
+        {
+          "id": "date",
+          "name": "Event Start Date",
+          "type": "date",
+          "value": "2025-06-08"
+        },
+        {
+          "id": "days",
+          "name": "Number of Days",
+          "type": "number",
+          "value": 5
+        },
+        {
+          "id": "desc",
+          "name": "Event Description",
+          "type": "longtext",
+          "value": "A week-long coworking space dedicated to Web3 builders. Get your work done alongside fellow developers, designers, and creators. Daily lightning talks, collaborative sessions, and impromptu workshops. High-speed internet, unlimited coffee, and a supportive community included!"
+        },
+        {
+          "id": "org",
+          "name": "Organizer Name",
+          "type": "text",
+          "value": "Web3 Berlin Collective"
+        },
+        {
+          "id": "venue",
+          "name": "Venue Name",
+          "type": "text",
+          "value": "The Circus Berlin"
+        },
+        {
+          "id": "address",
+          "name": "Venue Address",
+          "type": "text",
+          "value": "Weinbergsweg 1A, 10119 Berlin, Germany"
+        },
+        {
+          "id": "venuelink",
+          "name": "Venue Link",
+          "type": "url",
+          "value": "https://www.circus-berlin.de"
+        },
+        {
+          "id": "eventlink",
+          "name": "Event Link/Website",
+          "type": "url",
+          "value": "https://web3builders.berlin"
+        },
+        {
+          "id": "logo",
+          "name": "Logo",
+          "type": "file",
+          "value": [
+            {
+              "url": "https://picsum.photos/seed/web3builders/200",
+              "filename": "web3-builders-logo.jpg"
+            }
+          ]
+        },
+        {
+          "id": "day1start",
+          "name": "Day 1 - Start Time",
+          "type": "time",
+          "value": "09:00"
+        },
+        {
+          "id": "day1end",
+          "name": "Day 1 - End Time",
+          "type": "time",
+          "value": "20:00"
+        },
+        {
+          "id": "day2start",
+          "name": "Day 2 - Start Time",
+          "type": "time",
+          "value": "09:00"
+        },
+        {
+          "id": "day2end",
+          "name": "Day 2 - End Time",
+          "type": "time",
+          "value": "20:00"
+        },
+        {
+          "id": "day3start",
+          "name": "Day 3 - Start Time",
+          "type": "time",
+          "value": "09:00"
+        },
+        {
+          "id": "day3end",
+          "name": "Day 3 - End Time",
+          "type": "time",
+          "value": "20:00"
+        },
+        {
+          "id": "day4start",
+          "name": "Day 4 - Start Time",
+          "type": "time",
+          "value": "09:00"
+        },
+        {
+          "id": "day4end",
+          "name": "Day 4 - End Time",
+          "type": "time",
+          "value": "20:00"
+        },
+        {
+          "id": "day5start",
+          "name": "Day 5 - Start Time",
+          "type": "time",
+          "value": "09:00"
+        },
+        {
+          "id": "day5end",
+          "name": "Day 5 - End Time",
+          "type": "time",
+          "value": "17:00"
+        }
+      ]
+    }
+  ],
+  "totalResponses": 4,
+  "pageCount": 1
+}

@@ -1,6 +1,85 @@
+"use client";
+
 import Image from "next/image";
+import EventsContainer from "@/components/EventsContainer";
+import { Event } from "@/components/Schedule";
+import { useEffect, useState } from "react";
+
+interface Question {
+  id: string;
+  name: string;
+  type: string;
+  value: string | number | boolean | { url: string; filename: string }[] | null;
+}
+
+interface Submission {
+  submissionId: string;
+  submissionTime: string;
+  questions: Question[];
+}
+
+interface ResponseData {
+  responses: Submission[];
+  totalResponses: number;
+  pageCount: number;
+}
+
+function transformEvents(data: ResponseData): Event[] {
+  // Transform the responses into a flattened format
+  const flattenedEvents = data.responses.map((submission) => {
+    const event: Record<string, string | number | boolean | { url: string; filename: string }[] | null> = {};
+
+    submission.questions.forEach((question) => {
+      event[question.name] = question.value;
+    });
+
+    return event;
+  });
+
+  // Transform the flattened events into the format needed by Schedule component
+  return flattenedEvents.map((event) => ({
+    eventName: String(event["Event Name"] || ""),
+    startDate: String(event["Event Start Date"] || ""),
+    endDate: (() => {
+      const startDate = new Date(String(event["Event Start Date"]) || "");
+      const days = Number(event["Number of Days"]) || 1;
+      const endDate = new Date(startDate);
+      endDate.setDate(endDate.getDate() + days - 1);
+      return endDate.toISOString();
+    })(),
+    organizer: String(event["Organizer Name"] || ""),
+    description: String(event["Event Description"] || ""),
+    eventTypes: Array.isArray(event["Event Type"]) ? (event["Event Type"] as Event["eventTypes"]) : ["Other"],
+    venue: event["Venue Name"] ? String(event["Venue Name"]) : undefined,
+    venueAddress: event["Venue Address"] ? String(event["Venue Address"]) : undefined,
+    venueLink: event["Venue Link"] ? String(event["Venue Link"]) : undefined,
+    eventLink: event["Event Link/Website"] ? String(event["Event Link/Website"]) : undefined,
+    logo: Array.isArray(event["Logo"]) ? (event["Logo"] as { url: string; filename: string }[]) : null,
+    dailySchedule: Array.from({ length: 7 }, (_, i) => ({
+      startTime: event[`Day ${i + 1} - Start Time`] ? String(event[`Day ${i + 1} - Start Time`]) : null,
+      endTime: event[`Day ${i + 1} - End Time`] ? String(event[`Day ${i + 1} - End Time`]) : null,
+    })),
+  }));
+}
 
 export default function Home() {
+  const [events, setEvents] = useState<Event[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    fetch("/exampleResponse.json")
+      .then((response) => response.json())
+      .then((data: ResponseData) => {
+        const transformedEvents = transformEvents(data);
+        setEvents(transformedEvents);
+        setIsLoading(false);
+      })
+      .catch((error) => {
+        console.error("Error fetching events:", error);
+        setIsLoading(false);
+      });
+  }, []);
+
   return (
     <div className="flex flex-col items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)] bg-black text-white">
       <main className="flex flex-col gap-6 items-center text-center max-w-2xl">
@@ -25,6 +104,8 @@ export default function Home() {
           Submit Your Event
         </a>
       </main>
+
+      {isLoading ? <div className="text-gray-400">Loading events...</div> : <EventsContainer events={events} />}
     </div>
   );
 }
