@@ -60,7 +60,7 @@ const EventCard: FC<EventCardProps> = ({ event }) => {
         <div className="flex-1 min-w-0">
           {/* Header Section */}
           <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-2 sm:gap-4">
-            <div>
+            <div className="flex flex-col items-start gap-1">
               <h3 className="text-xl font-bold text-white group">
                 <a
                   href={event.eventLink}
@@ -69,32 +69,13 @@ const EventCard: FC<EventCardProps> = ({ event }) => {
                   className="hover:text-primary-400 transition-colors inline-flex items-center gap-1"
                 >
                   {event.eventName}
-                  <svg
-                    className="w-4 h-4 opacity-0 group-hover:opacity-100 transition-opacity"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
-                    />
-                  </svg>
                 </a>
                 {event.totalDays && event.totalDays > 1 && (
-                  <div className="text-sm text-gray-400">
+                  <span className="ml-2 text-sm text-gray-400">
                     Day {event.dayIndex}/{event.totalDays}
-                  </div>
+                  </span>
                 )}
               </h3>
-            </div>
-            <div className="flex flex-col items-start sm:items-end shrink-0">
-              <div className="text-lg text-gray-400">
-                {event.startTime} - {event.endTime}
-              </div>
               <div className="mt-1 flex flex-wrap gap-1 sm:justify-end">
                 {event.eventTypes.map((type) => (
                   <span
@@ -106,6 +87,11 @@ const EventCard: FC<EventCardProps> = ({ event }) => {
                     {type}
                   </span>
                 ))}
+              </div>
+            </div>
+            <div className="flex flex-col items-start sm:items-end shrink-0">
+              <div className="text-lg text-gray-400">
+                {event.startTime} - {event.endTime}
               </div>
             </div>
           </div>
