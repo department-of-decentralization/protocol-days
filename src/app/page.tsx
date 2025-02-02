@@ -49,7 +49,9 @@ function transformEvents(data: ResponseData): Event[] {
     })(),
     organizer: String(event["Organizer Name"] || ""),
     description: String(event["Event Description"] || ""),
-    eventTypes: Array.isArray(event["Event Type"]) ? (event["Event Type"] as Event["eventTypes"]) : ["Other"],
+    eventTypes: Array.isArray(event["Event Type"])
+      ? (event["Event Type"] as unknown as Event["eventTypes"])
+      : ["Other"],
     venue: String(event["Venue Name"] || ""),
     venueAddress: String(event["Venue Address"] || ""),
     venueLink: event["Venue Link"] ? String(event["Venue Link"]) : undefined,

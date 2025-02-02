@@ -4,7 +4,7 @@ import { useState } from "react";
 import Schedule from "./Schedule";
 import EventList from "./EventList";
 import { Event } from "./Schedule";
-import { EVENT_TYPES, EVENT_TYPE_COLORS, EventType } from "@/constants/eventTypes";
+import { EVENT_TYPES, EventType, EventTypeIcon, getBadgeClasses } from "@/constants/eventTypes";
 
 interface EventsContainerProps {
   events: Event[];
@@ -60,8 +60,11 @@ export default function EventsContainer({ events }: EventsContainerProps) {
               const count = eventStats.byType[type];
               if (count === 0) return null; // Don't show types with no events
               return (
-                <div key={type}>
-                  {type}: <span className="text-gray-300">{count}</span>
+                <div key={type} className="flex items-center gap-1.5">
+                  <EventTypeIcon type={type} className="!text-gray-400" />
+                  <span>
+                    {type}: <span className="text-gray-300">{count}</span>
+                  </span>
                 </div>
               );
             })}
@@ -74,19 +77,19 @@ export default function EventsContainer({ events }: EventsContainerProps) {
         <p className="text-gray-400 text-sm">Select event types below to filter</p>
         <div className="flex flex-wrap justify-center gap-2 max-w-4xl">
           {EVENT_TYPES.map((type) => {
-            const colors = EVENT_TYPE_COLORS[type];
             const count = eventStats.byType[type];
             if (count === 0) return null; // Don't show types with no events
             return (
               <button
                 key={type}
                 onClick={() => toggleEventType(type)}
-                className={`px-3 py-1.5 rounded-full text-sm font-medium border transition-colors ${
+                className={`px-3 py-1.5 rounded-full text-sm font-medium transition-colors flex items-center gap-1.5 border ${
                   selectedTypes.has(type)
-                    ? `${colors.bg} ${colors.text} ${colors.border}`
+                    ? getBadgeClasses(type)
                     : "text-gray-400 border-gray-700 hover:border-gray-600"
                 }`}
               >
+                <EventTypeIcon type={type} className={selectedTypes.has(type) ? "" : "text-gray-400"} />
                 {type} ({count})
               </button>
             );

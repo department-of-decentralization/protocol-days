@@ -1,11 +1,11 @@
 import { FC } from "react";
 import ReactMarkdown from "react-markdown";
 import { Event } from "./Schedule";
-import { EVENT_TYPE_COLORS } from "@/constants/eventTypes";
 import { FaDiscord, FaTelegram, FaLink, FaMapMarkerAlt } from "react-icons/fa";
 import { SiMatrix, SiSignal } from "react-icons/si";
 import { BsChatDots } from "react-icons/bs";
 import { LuCalendarPlus } from "react-icons/lu";
+import { EventTypeIcon, getBadgeClasses } from "@/constants/eventTypes";
 
 interface EventCardProps {
   event: Event & {
@@ -16,11 +16,6 @@ interface EventCardProps {
     currentDate: string;
   };
 }
-
-const getBadgeColor = (eventType: Event["eventTypes"][number]) => {
-  const colors = EVENT_TYPE_COLORS[eventType];
-  return `${colors.bg} ${colors.text} ${colors.border}`;
-};
 
 const generateGoogleCalendarLink = (event: EventCardProps["event"]) => {
   const dateStr = event.currentDate.split("T")[0];
@@ -99,10 +94,11 @@ const EventCard: FC<EventCardProps> = ({ event }) => {
                 {event.eventTypes.map((type) => (
                   <span
                     key={type}
-                    className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium border ${getBadgeColor(
+                    className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium border ${getBadgeClasses(
                       type
                     )}`}
                   >
+                    <EventTypeIcon type={type} className="mr-1" />
                     {type}
                   </span>
                 ))}
