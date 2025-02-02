@@ -52,10 +52,10 @@ export default function EventsContainer({ events }: EventsContainerProps) {
       <div className="flex flex-col items-center mb-12 text-center">
         <div className="mb-6">
           <h2 className="text-2xl font-bold text-white mb-2">
-            Total Events: {eventStats.total}
-            {eventStats.filtered !== eventStats.total && ` (of ${eventStats.total} total)`}
+            <div className="text-8xl font-bold">{eventStats.total}</div>
+            <div className="text-2xl">events</div>
           </h2>
-          <div className="flex flex-wrap justify-center gap-x-6 gap-y-2 text-sm text-gray-400">
+          <div className="flex flex-wrap justify-center gap-x-6 gap-y-2 text-sm text-gray-400 mt-4">
             {EVENT_TYPES.map((type) => {
               const count = eventStats.byType[type];
               if (count === 0) return null; // Don't show types with no events
