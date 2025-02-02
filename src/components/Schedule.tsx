@@ -1,7 +1,7 @@
 import { FC, useState, useEffect } from "react";
 import EventCard from "./EventCard";
 import { IoClose } from "react-icons/io5";
-
+import Image from "next/image";
 export interface Event {
   eventName: string;
   startDate: string;
@@ -263,10 +263,12 @@ const Schedule: FC<ScheduleProps> = ({ events }) => {
                         </span>
                       </span>
                       {event.logo?.[0]?.url && (
-                        <img
+                        <Image
                           src={event.logo[0].url}
                           alt=""
                           className="w-[25px] h-[25px] sm:w-[40px] sm:h-[40px] object-contain rounded -rotate-90 mt-1"
+                          width={40}
+                          height={40}
                         />
                       )}
                     </div>

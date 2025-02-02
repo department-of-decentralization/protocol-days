@@ -7,6 +7,7 @@ import { BsChatDots } from "react-icons/bs";
 import { LuCalendarPlus } from "react-icons/lu";
 import { IoChevronDown, IoChevronUp } from "react-icons/io5";
 import { EventTypeIcon, getBadgeClasses } from "@/constants/eventTypes";
+import Image from "next/image";
 
 interface EventCardProps {
   event: Event & {
@@ -78,7 +79,13 @@ const EventCard: FC<EventCardProps> = ({ event, uncollapsible = false, onClose }
           {/* Logo Section */}
           {event.logo?.[0]?.url && (
             <div className="flex justify-center sm:justify-start">
-              <img src={event.logo[0].url} alt="" className="w-24 h-24 sm:w-16 sm:h-16 object-contain rounded" />
+              <Image
+                src={event.logo[0].url}
+                alt=""
+                className="w-24 h-24 sm:w-16 sm:h-16 object-contain rounded"
+                width={96}
+                height={96}
+              />
             </div>
           )}
 
