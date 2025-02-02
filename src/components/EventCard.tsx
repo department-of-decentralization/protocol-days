@@ -98,8 +98,8 @@ const EventCard: FC<EventCardProps> = ({ event }) => {
                       type
                     )}`}
                   >
-                    <EventTypeIcon type={type} className="mr-1" />
-                    {type}
+                    <EventTypeIcon type={type} />
+                    <span className="ml-1">{type}</span>
                   </span>
                 ))}
               </div>
