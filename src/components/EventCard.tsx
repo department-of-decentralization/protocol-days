@@ -129,6 +129,15 @@ const EventCard: FC<EventCardProps> = ({ event, uncollapsible = false }) => {
                 <div className="text-lg text-gray-400">
                   {event.startTime} - {event.endTime}
                 </div>
+                {uncollapsible && (
+                  <div className="text-sm text-gray-500">
+                    {new Date(event.currentDate).toLocaleDateString("en-US", {
+                      weekday: "long",
+                      month: "long",
+                      day: "numeric",
+                    })}
+                  </div>
+                )}
               </div>
             </div>
           </div>
