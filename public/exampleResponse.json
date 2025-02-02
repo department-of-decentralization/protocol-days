@@ -35,7 +35,14 @@
           "type": "ShortAnswer",
           "value": "Luckenwalder Str. 4-6, 10963 Berlin"
         },
-        { "id": "oPoS", "name": "Venue Link", "type": "URLInput", "value": "https://station-berlin.de" }
+        { "id": "oPoS", "name": "Venue Link", "type": "URLInput", "value": "https://station-berlin.de" },
+        {
+          "id": "g5HN",
+          "name": "Link to Event Group Chat",
+          "type": "URLInput",
+          "value": "https://discord.gg/ethberlin"
+        },
+        { "id": "cYGW", "name": "Event Group Chat Platform", "type": "Dropdown", "value": "Discord" }
       ],
       "calculations": [],
       "urlParameters": [],
@@ -81,7 +88,14 @@
           "type": "ShortAnswer",
           "value": "Rheinsberger Str. 76/77, 10115 Berlin"
         },
-        { "id": "oPoS", "name": "Venue Link", "type": "URLInput", "value": "https://factoryberlin.com" }
+        { "id": "oPoS", "name": "Venue Link", "type": "URLInput", "value": "https://factoryberlin.com" },
+        {
+          "id": "g5HN",
+          "name": "Link to Event Group Chat",
+          "type": "URLInput",
+          "value": "https://t.me/berlinweb3hack"
+        },
+        { "id": "cYGW", "name": "Event Group Chat Platform", "type": "Dropdown", "value": "Telegram" }
       ],
       "calculations": [],
       "urlParameters": [],
@@ -129,7 +143,14 @@
           "name": "Venue Link",
           "type": "URLInput",
           "value": "https://sohohouse.com/houses/soho-house-berlin"
-        }
+        },
+        {
+          "id": "g5HN",
+          "name": "Link to Event Group Chat",
+          "type": "URLInput",
+          "value": "https://signal.group/defi-nights"
+        },
+        { "id": "cYGW", "name": "Event Group Chat Platform", "type": "Dropdown", "value": "Signal" }
       ],
       "calculations": [],
       "urlParameters": [],
@@ -179,7 +200,14 @@
           "type": "ShortAnswer",
           "value": "Rudi-Dutschke-Straße 23, 10969 Berlin"
         },
-        { "id": "oPoS", "name": "Venue Link", "type": "URLInput", "value": "https://betahaus.com" }
+        { "id": "oPoS", "name": "Venue Link", "type": "URLInput", "value": "https://betahaus.com" },
+        {
+          "id": "g5HN",
+          "name": "Link to Event Group Chat",
+          "type": "URLInput",
+          "value": "https://matrix.to/#/#blockdev:matrix.org"
+        },
+        { "id": "cYGW", "name": "Event Group Chat Platform", "type": "Dropdown", "value": "Matrix" }
       ],
       "calculations": [],
       "urlParameters": [],
@@ -228,7 +256,14 @@
         { "id": "jmRB", "name": "Event Link/Website", "type": "URLInput", "value": "https://cryptoart.berlin" },
         { "id": "naa9", "name": "Venue Name", "type": "ShortAnswer", "value": "Urban Spree" },
         { "id": "ry8w", "name": "Venue Address", "type": "ShortAnswer", "value": "Revaler Str. 99, 10245 Berlin" },
-        { "id": "oPoS", "name": "Venue Link", "type": "URLInput", "value": "https://urbanspree.com" }
+        { "id": "oPoS", "name": "Venue Link", "type": "URLInput", "value": "https://urbanspree.com" },
+        {
+          "id": "g5HN",
+          "name": "Link to Event Group Chat",
+          "type": "URLInput",
+          "value": "https://discord.gg/cryptoart"
+        },
+        { "id": "cYGW", "name": "Event Group Chat Platform", "type": "Dropdown", "value": "Discord" }
       ],
       "calculations": [],
       "urlParameters": [],
@@ -267,7 +302,14 @@
         { "id": "jmRB", "name": "Event Link/Website", "type": "URLInput", "value": "https://web3gaming.berlin" },
         { "id": "naa9", "name": "Venue Name", "type": "ShortAnswer", "value": "Kulturbrauerei" },
         { "id": "ry8w", "name": "Venue Address", "type": "ShortAnswer", "value": "Schönhauser Allee 36, 10435 Berlin" },
-        { "id": "oPoS", "name": "Venue Link", "type": "URLInput", "value": "https://kulturbrauerei.de" }
+        { "id": "oPoS", "name": "Venue Link", "type": "URLInput", "value": "https://kulturbrauerei.de" },
+        {
+          "id": "g5HN",
+          "name": "Link to Event Group Chat",
+          "type": "URLInput",
+          "value": "https://discord.gg/web3gaming"
+        },
+        { "id": "cYGW", "name": "Event Group Chat Platform", "type": "Dropdown", "value": "Discord" }
       ]
     },
     {
@@ -298,7 +340,14 @@
         { "id": "jmRB", "name": "Event Link/Website", "type": "URLInput", "value": "https://dao.berlin" },
         { "id": "naa9", "name": "Venue Name", "type": "ShortAnswer", "value": "The Reed" },
         { "id": "ry8w", "name": "Venue Address", "type": "ShortAnswer", "value": "Köpenicker Str. 70, 10179 Berlin" },
-        { "id": "oPoS", "name": "Venue Link", "type": "URLInput", "value": "https://thereed.berlin" }
+        { "id": "oPoS", "name": "Venue Link", "type": "URLInput", "value": "https://thereed.berlin" },
+        {
+          "id": "g5HN",
+          "name": "Link to Event Group Chat",
+          "type": "URLInput",
+          "value": "https://discord.gg/berlinDAO"
+        },
+        { "id": "cYGW", "name": "Event Group Chat Platform", "type": "Dropdown", "value": "Discord" }
       ]
     },
     {
@@ -333,7 +382,14 @@
         { "id": "jmRB", "name": "Event Link/Website", "type": "URLInput", "value": "https://security.blockdev.berlin" },
         { "id": "naa9", "name": "Venue Name", "type": "ShortAnswer", "value": "Alte Münze" },
         { "id": "ry8w", "name": "Venue Address", "type": "ShortAnswer", "value": "Molkenmarkt 2, 10179 Berlin" },
-        { "id": "oPoS", "name": "Venue Link", "type": "URLInput", "value": "https://alte-muenze-berlin.de" }
+        { "id": "oPoS", "name": "Venue Link", "type": "URLInput", "value": "https://alte-muenze-berlin.de" },
+        {
+          "id": "g5HN",
+          "name": "Link to Event Group Chat",
+          "type": "URLInput",
+          "value": "https://discord.gg/blockchainsecurity"
+        },
+        { "id": "cYGW", "name": "Event Group Chat Platform", "type": "Dropdown", "value": "Discord" }
       ]
     },
     {
@@ -377,7 +433,14 @@
         },
         { "id": "naa9", "name": "Venue Name", "type": "ShortAnswer", "value": "The Circus" },
         { "id": "ry8w", "name": "Venue Address", "type": "ShortAnswer", "value": "Weinbergsweg 20, 10119 Berlin" },
-        { "id": "oPoS", "name": "Venue Link", "type": "URLInput", "value": "https://thecircus.berlin" }
+        { "id": "oPoS", "name": "Venue Link", "type": "URLInput", "value": "https://thecircus.berlin" },
+        {
+          "id": "g5HN",
+          "name": "Link to Event Group Chat",
+          "type": "URLInput",
+          "value": "https://discord.gg/web3founders"
+        },
+        { "id": "cYGW", "name": "Event Group Chat Platform", "type": "Dropdown", "value": "Discord" }
       ]
     },
     {
@@ -410,7 +473,14 @@
         { "id": "jmRB", "name": "Event Link/Website", "type": "URLInput", "value": "https://trading.cryptoberlin.edu" },
         { "id": "naa9", "name": "Venue Name", "type": "ShortAnswer", "value": "Mindspace" },
         { "id": "ry8w", "name": "Venue Address", "type": "ShortAnswer", "value": "Friedrichstraße 68, 10117 Berlin" },
-        { "id": "oPoS", "name": "Venue Link", "type": "URLInput", "value": "https://mindspace.me/berlin" }
+        { "id": "oPoS", "name": "Venue Link", "type": "URLInput", "value": "https://mindspace.me/berlin" },
+        {
+          "id": "g5HN",
+          "name": "Link to Event Group Chat",
+          "type": "URLInput",
+          "value": "https://discord.gg/cryptotrading"
+        },
+        { "id": "cYGW", "name": "Event Group Chat Platform", "type": "Dropdown", "value": "Discord" }
       ]
     },
     {
@@ -443,7 +513,9 @@
         { "id": "jmRB", "name": "Event Link/Website", "type": "URLInput", "value": "https://l2summit.berlin" },
         { "id": "naa9", "name": "Venue Name", "type": "ShortAnswer", "value": "Kosmos Berlin" },
         { "id": "ry8w", "name": "Venue Address", "type": "ShortAnswer", "value": "Karl-Marx-Allee 131A, 10243 Berlin" },
-        { "id": "oPoS", "name": "Venue Link", "type": "URLInput", "value": "https://kosmos-berlin.de" }
+        { "id": "oPoS", "name": "Venue Link", "type": "URLInput", "value": "https://kosmos-berlin.de" },
+        { "id": "g5HN", "name": "Link to Event Group Chat", "type": "URLInput", "value": "https://discord.gg/layer2" },
+        { "id": "cYGW", "name": "Event Group Chat Platform", "type": "Dropdown", "value": "Discord" }
       ]
     },
     {
@@ -478,7 +550,9 @@
         { "id": "jmRB", "name": "Event Link/Website", "type": "URLInput", "value": "https://defidev.berlin" },
         { "id": "naa9", "name": "Venue Name", "type": "ShortAnswer", "value": "Silent Green" },
         { "id": "ry8w", "name": "Venue Address", "type": "ShortAnswer", "value": "Gerichtstraße 35, 13347 Berlin" },
-        { "id": "oPoS", "name": "Venue Link", "type": "URLInput", "value": "https://silent-green.net" }
+        { "id": "oPoS", "name": "Venue Link", "type": "URLInput", "value": "https://silent-green.net" },
+        { "id": "g5HN", "name": "Link to Event Group Chat", "type": "URLInput", "value": "https://discord.gg/defidev" },
+        { "id": "cYGW", "name": "Event Group Chat Platform", "type": "Dropdown", "value": "Discord" }
       ]
     },
     {
@@ -514,7 +588,14 @@
         },
         { "id": "naa9", "name": "Venue Name", "type": "ShortAnswer", "value": "Tresor Berlin" },
         { "id": "ry8w", "name": "Venue Address", "type": "ShortAnswer", "value": "Köpenicker Str. 70, 10179 Berlin" },
-        { "id": "oPoS", "name": "Venue Link", "type": "URLInput", "value": "https://tresorberlin.com" }
+        { "id": "oPoS", "name": "Venue Link", "type": "URLInput", "value": "https://tresorberlin.com" },
+        {
+          "id": "g5HN",
+          "name": "Link to Event Group Chat",
+          "type": "URLInput",
+          "value": "https://discord.gg/blockchainart"
+        },
+        { "id": "cYGW", "name": "Event Group Chat Platform", "type": "Dropdown", "value": "Discord" }
       ]
     },
     {
@@ -545,7 +626,14 @@
         { "id": "jmRB", "name": "Event Link/Website", "type": "URLInput", "value": "https://zk.privacy.berlin" },
         { "id": "naa9", "name": "Venue Name", "type": "ShortAnswer", "value": "Café Moscow" },
         { "id": "ry8w", "name": "Venue Address", "type": "ShortAnswer", "value": "Karl-Marx-Allee 34, 10178 Berlin" },
-        { "id": "oPoS", "name": "Venue Link", "type": "URLInput", "value": "https://cafemoscow.berlin" }
+        { "id": "oPoS", "name": "Venue Link", "type": "URLInput", "value": "https://cafemoscow.berlin" },
+        {
+          "id": "g5HN",
+          "name": "Link to Event Group Chat",
+          "type": "URLInput",
+          "value": "https://discord.gg/zkprivacy"
+        },
+        { "id": "cYGW", "name": "Event Group Chat Platform", "type": "Dropdown", "value": "Discord" }
       ]
     },
     {
@@ -578,7 +666,14 @@
         { "id": "jmRB", "name": "Event Link/Website", "type": "URLInput", "value": "https://ux.web3.berlin" },
         { "id": "naa9", "name": "Venue Name", "type": "ShortAnswer", "value": "Design Offices" },
         { "id": "ry8w", "name": "Venue Address", "type": "ShortAnswer", "value": "Hessische Str. 11, 10115 Berlin" },
-        { "id": "oPoS", "name": "Venue Link", "type": "URLInput", "value": "https://designoffices.de/berlin" }
+        { "id": "oPoS", "name": "Venue Link", "type": "URLInput", "value": "https://designoffices.de/berlin" },
+        {
+          "id": "g5HN",
+          "name": "Link to Event Group Chat",
+          "type": "URLInput",
+          "value": "https://discord.gg/web3design"
+        },
+        { "id": "cYGW", "name": "Event Group Chat Platform", "type": "Dropdown", "value": "Discord" }
       ]
     },
     {
@@ -616,7 +711,14 @@
         },
         { "id": "naa9", "name": "Venue Name", "type": "ShortAnswer", "value": "Spreespeicher" },
         { "id": "ry8w", "name": "Venue Address", "type": "ShortAnswer", "value": "Stralauer Allee 2, 10245 Berlin" },
-        { "id": "oPoS", "name": "Venue Link", "type": "URLInput", "value": "https://spreespeicher-events.de" }
+        { "id": "oPoS", "name": "Venue Link", "type": "URLInput", "value": "https://spreespeicher-events.de" },
+        {
+          "id": "g5HN",
+          "name": "Link to Event Group Chat",
+          "type": "URLInput",
+          "value": "https://discord.gg/blockchaingovernance"
+        },
+        { "id": "cYGW", "name": "Event Group Chat Platform", "type": "Dropdown", "value": "Discord" }
       ]
     },
     {
@@ -647,7 +749,14 @@
         { "id": "jmRB", "name": "Event Link/Website", "type": "URLInput", "value": "https://gaming.crypto.berlin" },
         { "id": "naa9", "name": "Venue Name", "type": "ShortAnswer", "value": "Spielfeld Digital Hub" },
         { "id": "ry8w", "name": "Venue Address", "type": "ShortAnswer", "value": "Skalitzer Str. 85/86, 10997 Berlin" },
-        { "id": "oPoS", "name": "Venue Link", "type": "URLInput", "value": "https://spielfeld.com" }
+        { "id": "oPoS", "name": "Venue Link", "type": "URLInput", "value": "https://spielfeld.com" },
+        {
+          "id": "g5HN",
+          "name": "Link to Event Group Chat",
+          "type": "URLInput",
+          "value": "https://discord.gg/cryptogaming"
+        },
+        { "id": "cYGW", "name": "Event Group Chat Platform", "type": "Dropdown", "value": "Discord" }
       ]
     },
     {
@@ -678,7 +787,14 @@
         { "id": "jmRB", "name": "Event Link/Website", "type": "URLInput", "value": "https://careers.web3.berlin" },
         { "id": "naa9", "name": "Venue Name", "type": "ShortAnswer", "value": "Fabrik 23" },
         { "id": "ry8w", "name": "Venue Address", "type": "ShortAnswer", "value": "Gerichtstraße 23, 13347 Berlin" },
-        { "id": "oPoS", "name": "Venue Link", "type": "URLInput", "value": "https://fabrik23.com" }
+        { "id": "oPoS", "name": "Venue Link", "type": "URLInput", "value": "https://fabrik23.com" },
+        {
+          "id": "g5HN",
+          "name": "Link to Event Group Chat",
+          "type": "URLInput",
+          "value": "https://discord.gg/web3careers"
+        },
+        { "id": "cYGW", "name": "Event Group Chat Platform", "type": "Dropdown", "value": "Discord" }
       ]
     },
     {
@@ -709,7 +825,14 @@
         { "id": "jmRB", "name": "Event Link/Website", "type": "URLInput", "value": "https://impact.blockchain.berlin" },
         { "id": "naa9", "name": "Venue Name", "type": "ShortAnswer", "value": "Malzfabrik" },
         { "id": "ry8w", "name": "Venue Address", "type": "ShortAnswer", "value": "Bessemerstraße 2-14, 12103 Berlin" },
-        { "id": "oPoS", "name": "Venue Link", "type": "URLInput", "value": "https://malzfabrik.de" }
+        { "id": "oPoS", "name": "Venue Link", "type": "URLInput", "value": "https://malzfabrik.de" },
+        {
+          "id": "g5HN",
+          "name": "Link to Event Group Chat",
+          "type": "URLInput",
+          "value": "https://discord.gg/blockchainimpact"
+        },
+        { "id": "cYGW", "name": "Event Group Chat Platform", "type": "Dropdown", "value": "Discord" }
       ]
     },
     {
@@ -745,7 +868,14 @@
           "type": "ShortAnswer",
           "value": "Falckensteinstraße 49, 10997 Berlin"
         },
-        { "id": "oPoS", "name": "Venue Link", "type": "URLInput", "value": "https://water-gate.de" }
+        { "id": "oPoS", "name": "Venue Link", "type": "URLInput", "value": "https://water-gate.de" },
+        {
+          "id": "g5HN",
+          "name": "Link to Event Group Chat",
+          "type": "URLInput",
+          "value": "https://discord.gg/bbwclosing"
+        },
+        { "id": "cYGW", "name": "Event Group Chat Platform", "type": "Dropdown", "value": "Discord" }
       ]
     }
   ],

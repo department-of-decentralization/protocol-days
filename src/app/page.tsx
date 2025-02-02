@@ -50,10 +50,14 @@ function transformEvents(data: ResponseData): Event[] {
     organizer: String(event["Organizer Name"] || ""),
     description: String(event["Event Description"] || ""),
     eventTypes: Array.isArray(event["Event Type"]) ? (event["Event Type"] as Event["eventTypes"]) : ["Other"],
-    venue: event["Venue Name"] ? String(event["Venue Name"]) : undefined,
-    venueAddress: event["Venue Address"] ? String(event["Venue Address"]) : undefined,
+    venue: String(event["Venue Name"] || ""),
+    venueAddress: String(event["Venue Address"] || ""),
     venueLink: event["Venue Link"] ? String(event["Venue Link"]) : undefined,
-    eventLink: event["Event Link/Website"] ? String(event["Event Link/Website"]) : undefined,
+    eventLink: String(event["Event Link/Website"] || ""),
+    chatLink: event["Link to Event Group Chat"] ? String(event["Link to Event Group Chat"]) : undefined,
+    chatPlatform: event["Event Group Chat Platform"]
+      ? (String(event["Event Group Chat Platform"]) as Event["chatPlatform"])
+      : undefined,
     logo: Array.isArray(event["Logo"]) ? (event["Logo"] as { url: string; filename: string }[]) : null,
     dailySchedule: Array.from({ length: 7 }, (_, i) => ({
       startTime: event[`Day ${i + 1} - Start Time`] ? String(event[`Day ${i + 1} - Start Time`]) : null,

@@ -17,6 +17,8 @@ export interface Event {
     startTime: string | null;
     endTime: string | null;
   }[];
+  chatLink?: string;
+  chatPlatform?: "Matrix" | "Telegram" | "Discord" | "Signal" | "Other";
 }
 
 export interface ProcessedEvent extends Omit<Event, "startDate" | "endDate"> {

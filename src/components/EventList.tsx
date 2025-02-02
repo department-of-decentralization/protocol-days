@@ -49,7 +49,7 @@ const EventList: FC<EventListProps> = ({ events }) => {
   }, {} as Record<string, typeof sortedEvents>);
 
   return (
-    <div className="w-full max-w-4xl mx-auto space-y-12">
+    <div className="w-full max-w-4xl mx-auto space-y-12 px-2">
       {Object.entries(eventsByDate).map(([date, dateEvents]) => {
         const displayDate = new Date(date);
         return (
