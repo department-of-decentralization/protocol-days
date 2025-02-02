@@ -21,6 +21,7 @@ const generateGoogleCalendarLink = (event: EventCardProps["event"]) => {
   const dateStr = event.currentDate.split("T")[0];
   const startDateTime = `${dateStr}T${event.startTime}:00`;
   const endDateTime = `${dateStr}T${event.endTime}:00`;
+  const timeZone = "Europe/Berlin"; // Using Berlin timezone since all events are in Berlin
 
   const details = [
     event.description,
@@ -40,6 +41,7 @@ const generateGoogleCalendarLink = (event: EventCardProps["event"]) => {
     details,
     location: event.venueAddress || event.venue || "",
     dates: `${startDateTime}/${endDateTime}`.replace(/[-:]/g, ""),
+    ctz: timeZone, // Add timezone parameter
   });
 
   return `https://calendar.google.com/calendar/render?${params.toString()}`;
