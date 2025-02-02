@@ -1,5 +1,6 @@
 import { FC, useState, useEffect } from "react";
 import EventCard from "./EventCard";
+import { IoClose } from "react-icons/io5";
 
 export interface Event {
   eventName: string;
@@ -283,7 +284,13 @@ const Schedule: FC<ScheduleProps> = ({ events }) => {
           className="fixed inset-0 bg-black/80 flex items-center justify-center p-4 z-50"
           onClick={() => setSelectedEvent(null)}
         >
-          <div className="w-full max-w-2xl max-h-[90vh] overflow-y-auto" onClick={(e) => e.stopPropagation()}>
+          <div className="relative w-full max-w-2xl max-h-[90vh] overflow-y-auto" onClick={(e) => e.stopPropagation()}>
+            <button
+              onClick={() => setSelectedEvent(null)}
+              className="absolute right-2 top-2 z-10 p-2 hover:bg-gray-800/50 rounded-full transition-colors"
+            >
+              <IoClose className="w-6 h-6 text-gray-400 hover:text-white" />
+            </button>
             <EventCard
               event={{
                 ...selectedEvent,
@@ -293,6 +300,7 @@ const Schedule: FC<ScheduleProps> = ({ events }) => {
                 endTime: selectedEvent.endTime,
                 currentDate: selectedEvent.currentDate,
               }}
+              uncollapsible={true}
             />
           </div>
         </div>
