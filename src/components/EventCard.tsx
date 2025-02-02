@@ -53,7 +53,7 @@ const EventCard: FC<EventCardProps> = ({ event }) => {
         {/* Logo Section */}
         {event.logo?.[0]?.url && (
           <div className="flex justify-center sm:justify-start">
-            <img src={event.logo[0].url} alt="" className="w-16 h-16 object-contain rounded" />
+            <img src={event.logo[0].url} alt="" className="w-24 h-24 sm:w-16 sm:h-16 object-contain rounded" />
           </div>
         )}
 
@@ -188,7 +188,7 @@ const EventCard: FC<EventCardProps> = ({ event }) => {
               </a>
               {event.totalDays && event.totalDays > 1 && (
                 <div className="text-[0.6rem] text-gray-500 text-center sm:text-right">
-                  You need to add each day separately
+                  You need to add each event day separately
                 </div>
               )}
             </div>

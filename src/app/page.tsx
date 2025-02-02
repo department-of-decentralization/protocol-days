@@ -81,7 +81,7 @@ export default function Home() {
   }, []);
 
   return (
-    <div className="flex flex-col items-center justify-items-center min-h-screen p-1 sm:p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)] bg-black text-white">
+    <div className="flex flex-col items-center justify-items-center min-h-screen w-screen p-1 sm:p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)] bg-black text-white">
       <main className="flex flex-col gap-6 items-center text-center max-w-2xl">
         <Image src="/bbw25-logo.svg" alt="Berlin Blockchain Week 2025 logo" width={300} height={100} priority />
 
