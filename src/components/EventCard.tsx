@@ -51,7 +51,7 @@ const generateGoogleCalendarLink = (event: EventCardProps["event"]) => {
   return `https://calendar.google.com/calendar/render?${params.toString()}`;
 };
 
-const EventCard: FC<EventCardProps> = ({ event, uncollapsible = false, onClose }) => {
+const EventCard: FC<EventCardProps> = ({ event, uncollapsible = false }) => {
   const [isExpanded, setIsExpanded] = useState(uncollapsible);
 
   const getChatIcon = () => {

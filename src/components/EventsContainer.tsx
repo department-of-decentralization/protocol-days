@@ -89,7 +89,7 @@ export default function EventsContainer({ events }: EventsContainerProps) {
                     : "text-gray-400 border-gray-700 hover:border-gray-600"
                 }`}
               >
-                <EventTypeIcon type={type} className={selectedTypes.has(type) ? "" : "text-gray-400"} />
+                <EventTypeIcon type={type} />
                 {type} ({count})
               </button>
             );
