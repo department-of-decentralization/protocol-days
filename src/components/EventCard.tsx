@@ -125,7 +125,7 @@ const EventCard: FC<EventCardProps> = ({ event, uncollapsible = false }) => {
                   ))}
                 </div>
               </div>
-              <div className="flex flex-col items-start sm:items-end shrink-0">
+              <div className="flex flex-col items-center sm:items-end shrink-0">
                 <div className="text-lg text-gray-400">
                   {event.startTime} - {event.endTime}
                 </div>
