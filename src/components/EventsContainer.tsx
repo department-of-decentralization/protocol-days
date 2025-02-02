@@ -49,7 +49,7 @@ export default function EventsContainer({ events }: EventsContainerProps) {
   return (
     <section className="w-full">
       {/* Stats Section */}
-      <div className="flex flex-col items-center mb-12 text-center">
+      <div className="flex flex-col items-center mt-8 mb-12 text-center">
         <div className="mb-6">
           <h2 className="text-2xl font-bold text-white mb-2">
             <div className="text-8xl font-bold">{eventStats.total}</div>

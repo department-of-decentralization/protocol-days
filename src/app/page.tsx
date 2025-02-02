@@ -85,13 +85,13 @@ export default function Home() {
   }, []);
 
   return (
-    <div className="flex flex-col items-center justify-items-center min-h-screen w-screen p-1 sm:p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)] bg-black text-white">
-      <main className="flex flex-col gap-6 items-center text-center max-w-2xl">
-        <Image src="/bbw25-logo.svg" alt="Berlin Blockchain Week 2025 logo" width={300} height={100} priority />
+    <div className="flex flex-col items-center justify-items-center min-h-screen w-screen p-1 sm:p-8 pb-20 font-[family-name:var(--font-geist-sans)] bg-black text-white">
+      <main className="flex flex-col gap-4 items-center text-center max-w-2xl">
+        <Image src="/bbw25-logo.svg" alt="Berlin Blockchain Week 2025 logo" width={250} height={250} priority />
 
-        <h1 className="text-4xl sm:text-5xl font-bold text-white">Berlin Blockchain Week 2025</h1>
+        <h1 className="text-4xl sm:text-5xl font-bold text-white -mt-6">Berlin Blockchain Week 2025</h1>
 
-        <h2 className="text-2xl text-primary-500 font-semibold -mt-4">June 8-22</h2>
+        <h2 className="text-2xl text-primary-500 font-semibold">June 8-22</h2>
 
         <div className="space-y-4">
           <p className="text-xl text-gray-300">Coming Soon to Berlin</p>
