@@ -53,9 +53,8 @@ export const getEventIcon = (type: EventType) => {
   }
 };
 
-export const EventTypeIcon = ({ type, className = "" }: { type: EventType; className?: string }) => {
-  const badge = EVENT_TYPE_BADGES[type];
-  return <span className={`text-${badge.baseColor}-400 ${className}`}>{getEventIcon(type)}</span>;
+export const EventTypeIcon = ({ type }: { type: EventType }) => {
+  return <span>{getEventIcon(type)}</span>;
 };
 
 export const getBadgeClasses = (type: EventType) => {

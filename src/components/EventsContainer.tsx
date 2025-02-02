@@ -61,7 +61,7 @@ export default function EventsContainer({ events }: EventsContainerProps) {
               if (count === 0) return null; // Don't show types with no events
               return (
                 <div key={type} className="flex items-center gap-1.5">
-                  <EventTypeIcon type={type} className="!text-gray-400" />
+                  <EventTypeIcon type={type} />
                   <span>
                     {type}: <span className="text-gray-300">{count}</span>
                   </span>
