@@ -1,4 +1,4 @@
-import { FC } from "react";
+import { FC, useState, useEffect } from "react";
 
 export interface Event {
   eventName: string;
@@ -41,7 +41,6 @@ const MINUTES_PER_DAY = 24 * 60;
 const CHUNKS_PER_DAY = MINUTES_PER_DAY / MINUTES_PER_CHUNK;
 const TOTAL_DAYS = Math.ceil((END_DATE.getTime() - START_DATE.getTime()) / (1000 * 60 * 60 * 24)) + 1;
 const TIMELINE_HEIGHT = TOTAL_DAYS * CHUNKS_PER_DAY * CHUNK_HEIGHT;
-const EVENT_WIDTH = 150; // pixels
 const EVENT_GAP = 8; // pixels between overlapping events
 
 // Function to generate a unique color for each event
@@ -65,6 +64,17 @@ const getEventColor = (eventName: string) => {
 };
 
 const Schedule: FC<ScheduleProps> = ({ events }) => {
+  const [eventWidth, setEventWidth] = useState(window.innerWidth < 640 ? 50 : 100);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setEventWidth(window.innerWidth < 640 ? 50 : 100);
+    };
+
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
   // Split multi-day events into separate day events
   const splitEvents = events.flatMap((event) => {
     const startDate = new Date(event.startDate);
@@ -145,7 +155,7 @@ const Schedule: FC<ScheduleProps> = ({ events }) => {
       <div className="overflow-x-auto">
         <div className="flex min-w-[800px]">
           {/* Date and time labels */}
-          <div className="w-12 flex-shrink-0 pr-4 bg-black">
+          <div className="w-12 flex-shrink-0 pr-2 sm:pr-4 bg-black">
             {Array.from({ length: TOTAL_DAYS }).map((_, dayIndex) => {
               return (
                 <div key={dayIndex} style={{ height: `${CHUNKS_PER_DAY * CHUNK_HEIGHT}px` }} className="relative" />
@@ -169,7 +179,7 @@ const Schedule: FC<ScheduleProps> = ({ events }) => {
             ))}
 
             {/* Left Hour labels */}
-            <div className="absolute -left-12 top-0 bottom-0">
+            <div className="absolute -left-10 sm:-left-12 top-0 bottom-0">
               {Array.from({ length: TOTAL_DAYS }).map((_, dayIndex) =>
                 Array.from({ length: 24 }).map((_, hour) => {
                   const date = new Date(START_DATE);
@@ -181,7 +191,7 @@ const Schedule: FC<ScheduleProps> = ({ events }) => {
                   return (
                     <div
                       key={`${dayIndex}-${hour}`}
-                      className="absolute text-xs text-gray-500"
+                      className="absolute text-[9px] sm:text-xs text-gray-500"
                       style={{
                         top: `${(dayIndex * CHUNKS_PER_DAY + hour * 4) * CHUNK_HEIGHT}px`,
                         transform: "translateY(-50%)",
@@ -189,10 +199,10 @@ const Schedule: FC<ScheduleProps> = ({ events }) => {
                     >
                       {hour === 0 ? (
                         <span className="flex flex-col items-end text-right">
-                          <span className="text-gray-400 text-sm">
+                          <span className="text-gray-400 text-[9px] sm:text-xs">
                             {date.toLocaleDateString("en-US", { weekday: "short" })}
                           </span>
-                          <span className="font-bold text-white text-xl -mt-1">
+                          <span className="font-bold text-white text-sm sm:text-xl -mt-1">
                             {date.toLocaleDateString("en-US", { month: "short", day: "numeric" })}
                           </span>
                         </span>
@@ -218,7 +228,7 @@ const Schedule: FC<ScheduleProps> = ({ events }) => {
                   return (
                     <div
                       key={`${dayIndex}-${hour}`}
-                      className="absolute text-xs text-gray-500"
+                      className="absolute text-[9px] sm:text-xs text-gray-500"
                       style={{
                         top: `${(dayIndex * CHUNKS_PER_DAY + hour * 4) * CHUNK_HEIGHT}px`,
                         transform: "translateY(-50%)",
@@ -262,24 +272,28 @@ const Schedule: FC<ScheduleProps> = ({ events }) => {
               return (
                 <div
                   key={`${event.eventName}-${index}`}
-                  className={`absolute p-2 rounded ${getEventColor(
-                    event.eventName
-                  )} border border-gray-700 flex items-center justify-center`}
+                  className={`absolute p-2 rounded bg-gray-900 border border-gray-700 flex items-center justify-center`}
                   style={{
                     top: `${topPosition + chunkOffset}px`,
-                    left: `${8 + (event.column || 0) * (EVENT_WIDTH + EVENT_GAP)}px`,
-                    width: `${EVENT_WIDTH}px`,
+                    left: `${8 + (event.column || 0) * (eventWidth + EVENT_GAP)}px`,
+                    width: `${eventWidth}px`,
                     height: `${eventHeight}px`,
                   }}
                 >
-                  <div className="transform -rotate-90 whitespace-nowrap flex items-center gap-2">
-                    {event.logo?.[0]?.url && (
-                      <img src={event.logo[0].url} alt="" className="w-[40px] h-[40px] object-contain rounded" />
-                    )}
-                    <span className="text-sm font-medium">
-                      <b className="text-base">{event.eventName}</b>
-                      {event.totalDays > 1 && ` - (Day ${event.dayIndex}/${event.totalDays}) -`}
+                  <div className="h-full [writing-mode:vertical-rl] whitespace-normal flex items-center justify-center gap-1 sm:gap-2 p-1 sm:p-2">
+                    <span className="text-sm sm:text-base font-medium -rotate-180">
+                      <span className="text-[10px] sm:text-sm">{event.eventName}</span>
+                      <span className="text-[8px] sm:text-xs text-gray-400">
+                        {event.totalDays > 1 && ` - (Day ${event.dayIndex}/${event.totalDays})`}
+                      </span>
                     </span>
+                    {event.logo?.[0]?.url && (
+                      <img
+                        src={event.logo[0].url}
+                        alt=""
+                        className="w-[25px] h-[25px] sm:w-[40px] sm:h-[40px] object-contain rounded -rotate-90 mt-1"
+                      />
+                    )}
                   </div>
                 </div>
               );
