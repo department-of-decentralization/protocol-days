@@ -70,11 +70,13 @@ const EventCard: FC<EventCardProps> = ({ event, uncollapsible = false }) => {
   };
 
   return (
-    <div className="bg-gray-900 rounded-lg p-4 sm:p-6 border border-gray-800 hover:border-gray-700 transition-colors">
-      <div
-        className={uncollapsible ? "" : "cursor-pointer"}
-        onClick={() => !uncollapsible && setIsExpanded(!isExpanded)}
-      >
+    <div
+      className={`bg-gray-900 rounded-lg p-4 sm:p-6 border border-gray-800 hover:border-gray-700 transition-colors ${
+        uncollapsible ? "" : "cursor-pointer"
+      }`}
+      onClick={() => !uncollapsible && setIsExpanded(!isExpanded)}
+    >
+      <div>
         <div className="flex flex-col sm:flex-row gap-4">
           {/* Logo Section */}
           {event.logo?.[0]?.url && (
