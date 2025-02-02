@@ -287,7 +287,7 @@ const Schedule: FC<ScheduleProps> = ({ events }) => {
           <div className="relative w-full max-w-2xl max-h-[90vh] overflow-y-auto" onClick={(e) => e.stopPropagation()}>
             <button
               onClick={() => setSelectedEvent(null)}
-              className="absolute right-2 top-2 z-10 p-2 hover:bg-gray-800/50 rounded-full transition-colors"
+              className="absolute right-2 top-2 z-10 p-2 hover:bg-gray-800/50 rounded-full transition-colors sm:hidden"
             >
               <IoClose className="w-6 h-6 text-gray-400 hover:text-white" />
             </button>
