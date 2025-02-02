@@ -102,11 +102,12 @@ const EventCard: FC<EventCardProps> = ({ event, uncollapsible = false }) => {
                       </span>
                     )}
                   </h3>
-                  {isExpanded ? (
-                    <IoChevronUp className="w-5 h-5 text-gray-400" />
-                  ) : (
-                    <IoChevronDown className="w-5 h-5 text-gray-400" />
-                  )}
+                  {!uncollapsible &&
+                    (isExpanded ? (
+                      <IoChevronUp className="w-5 h-5 text-gray-400" />
+                    ) : (
+                      <IoChevronDown className="w-5 h-5 text-gray-400" />
+                    ))}
                 </div>
                 <div className="mt-1 flex flex-wrap gap-1">
                   {event.eventTypes.map((type) => (
