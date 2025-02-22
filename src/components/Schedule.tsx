@@ -78,8 +78,8 @@ const Schedule: FC<ScheduleProps> = ({ events }) => {
         dayIndex: index + 1,
         totalDays: days,
         currentDate: currentDate.toISOString(),
-        startTime: daySchedule?.startTime || "09:00", // Default to 9 AM if not specified
-        endTime: daySchedule?.endTime || "17:00", // Default to 5 PM if not specified
+        startTime: daySchedule?.startTime || "00:00", // Default to 00:00 AM if not specified
+        endTime: daySchedule?.endTime || "23:59", // Default to 23:59 PM if not specified
       };
     });
   });
