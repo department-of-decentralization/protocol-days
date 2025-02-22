@@ -30,7 +30,7 @@ export const EVENT_TYPE_BADGES: Record<EventType, BadgeConfig> = {
     baseColor: "orange",
   },
   Other: {
-    baseColor: "gray",
+    baseColor: "cyan",
   },
 };
 

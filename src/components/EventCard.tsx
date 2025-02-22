@@ -159,7 +159,7 @@ const EventCard: FC<EventCardProps> = ({ event, uncollapsible = false }) => {
                 <FaMapMarkerAlt className="w-4 h-4 mr-1 shrink-0" />
                 {event.venueLink ? (
                   <a
-                    href={event.venueLink}
+                    href={event.venueLink?.startsWith("http") ? event.venueLink : `https://${event.venueLink}`}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="hover:text-gray-300 transition-colors truncate"

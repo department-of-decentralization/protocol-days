@@ -29,6 +29,9 @@ export default {
     "border-yellow-500/20",
     "border-orange-500/20",
     "border-gray-500/20",
+    "bg-cyan-500/10",
+    "border-cyan-500/20",
+    "text-cyan-400",
   ],
   theme: {
     extend: {

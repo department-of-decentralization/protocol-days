@@ -11,7 +11,7 @@ interface EventsContainerProps {
 }
 
 export default function EventsContainer({ events }: EventsContainerProps) {
-  const [view, setView] = useState<"schedule" | "list">("schedule");
+  const [view, setView] = useState<"timeline" | "days">("days");
   const [selectedTypes, setSelectedTypes] = useState<Set<EventType>>(new Set(EVENT_TYPES));
 
   const filteredEvents = events.filter((event) => event.eventTypes.some((type) => selectedTypes.has(type)));
@@ -109,25 +109,25 @@ export default function EventsContainer({ events }: EventsContainerProps) {
       <div className="flex justify-center mb-8">
         <div className="inline-flex rounded-lg border border-gray-700 p-1">
           <button
-            onClick={() => setView("schedule")}
+            onClick={() => setView("timeline")}
             className={`px-4 py-2 rounded-md text-sm font-medium transition-colors ${
-              view === "schedule" ? "bg-primary-500 text-white" : "text-gray-400 hover:text-white"
+              view === "timeline" ? "bg-primary-500 text-white" : "text-gray-400 hover:text-white"
             }`}
           >
-            Schedule View
+            Timeline
           </button>
           <button
-            onClick={() => setView("list")}
+            onClick={() => setView("days")}
             className={`px-4 py-2 rounded-md text-sm font-medium transition-colors ${
-              view === "list" ? "bg-primary-500 text-white" : "text-gray-400 hover:text-white"
+              view === "days" ? "bg-primary-500 text-white" : "text-gray-400 hover:text-white"
             }`}
           >
-            List View
+            Days
           </button>
         </div>
       </div>
 
-      {view === "schedule" ? <Schedule events={filteredEvents} /> : <EventList events={filteredEvents} />}
+      {view === "timeline" ? <Schedule events={filteredEvents} /> : <EventList events={filteredEvents} />}
     </section>
   );
 }

@@ -68,12 +68,15 @@ function transformEvents(data: ResponseData): Event[] {
   }));
 }
 
+const EVENTS_FETCH_URL = "https://europe-west1-ethberlin-dystopian-faces.cloudfunctions.net/bbw2025-get-fillout-events";
+
 export default function Home() {
   const [events, setEvents] = useState<Event[]>([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [message, setMessage] = useState<string | null>("Loading events...");
 
   useEffect(() => {
-    fetch("/exampleResponse.json")
+    fetch(EVENTS_FETCH_URL)
       .then((response) => response.json())
       .then((data: ResponseData) => {
         const transformedEvents = transformEvents(data);
@@ -83,6 +86,7 @@ export default function Home() {
       .catch((error) => {
         console.error("Error fetching events:", error);
         setIsLoading(false);
+        setMessage("Error fetching events :(");
       });
   }, []);
 
@@ -111,7 +115,7 @@ export default function Home() {
         </a>
       </main>
 
-      {isLoading ? <div className="text-gray-400">Loading events...</div> : <EventsContainer events={events} />}
+      {isLoading ? <div className="text-gray-400 my-12 text-xl">{message}</div> : <EventsContainer events={events} />}
     </div>
   );
 }
