@@ -17,7 +17,6 @@ interface EventCardProps {
     endTime?: string;
     currentDate: string;
     dateDisplay?: string;
-    dailySchedule?: { date: string; startTime: string; endTime: string }[];
   };
   uncollapsible?: boolean;
   onClose?: () => void;
@@ -98,7 +97,7 @@ const EventCard: FC<EventCardProps> = ({ event, uncollapsible = false, onClose, 
 
           <div className="flex-1 min-w-0">
             {/* Header Section - Always visible */}
-            <div className="flex flex-col-reverse sm:flex-row justify-between gap-2 sm:gap-4 text-center sm:text-left items-center sm:items-start">
+            <div className="flex flex-col sm:flex-row justify-between gap-2 sm:gap-4 text-center sm:text-left items-center sm:items-start">
               <div className="flex flex-col items-center sm:items-start gap-1">
                 <div className="flex items-center gap-2">
                   <h3 className={`font-bold text-white ${listView ? "text-2xl" : "text-xl"}`}>
