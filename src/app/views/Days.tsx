@@ -10,10 +10,8 @@ const Days: FC<DaysProps> = ({ events }) => {
   // Split multi-day events into separate day events
   const splitEvents = events.flatMap((event) => {
     const startDate = new Date(event.startDate);
-    const endDate = new Date(event.endDate);
-    const days = Math.ceil((endDate.getTime() - startDate.getTime()) / (1000 * 60 * 60 * 24)) + 1;
 
-    return Array.from({ length: days }, (_, index) => {
+    return Array.from({ length: event.totalDays }, (_, index) => {
       const currentDate = new Date(startDate);
       currentDate.setDate(currentDate.getDate() + index);
 
@@ -23,10 +21,9 @@ const Days: FC<DaysProps> = ({ events }) => {
       return {
         ...event,
         dayIndex: index + 1,
-        totalDays: days,
         currentDate: currentDate.toISOString(),
-        startTime: daySchedule?.startTime || "09:00",
-        endTime: daySchedule?.endTime || "17:00",
+        startTime: daySchedule?.startTime || "00:00",
+        endTime: daySchedule?.endTime || "23:59",
       };
     });
   });

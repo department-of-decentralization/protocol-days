@@ -13,10 +13,11 @@ interface EventCardProps {
   event: Event & {
     dayIndex?: number;
     totalDays?: number;
-    startTime: string;
-    endTime: string;
+    startTime?: string;
+    endTime?: string;
     currentDate: string;
     dateDisplay?: string;
+    dailySchedule?: { date: string; startTime: string; endTime: string }[];
   };
   uncollapsible?: boolean;
   onClose?: () => void;
@@ -86,9 +87,9 @@ const EventCard: FC<EventCardProps> = ({ event, uncollapsible = false, onClose, 
               <Image
                 src={event.logo[0].url}
                 alt=""
-                className="w-24 h-24 sm:w-16 sm:h-16 object-contain rounded"
-                width={96}
-                height={96}
+                className={`object-contain rounded ${listView ? "w-32 h-32" : "w-24 h-24 sm:w-16 sm:h-16 "}`}
+                width={listView ? 128 : 96}
+                height={listView ? 128 : 96}
               />
             </div>
           )}
@@ -98,7 +99,7 @@ const EventCard: FC<EventCardProps> = ({ event, uncollapsible = false, onClose, 
             <div className="flex flex-col sm:flex-row justify-between gap-2 sm:gap-4 text-center sm:text-left items-center sm:items-start">
               <div className="flex flex-col items-center sm:items-start gap-1">
                 <div className="flex items-center gap-2">
-                  <h3 className="text-xl font-bold text-white">
+                  <h3 className={`font-bold text-white ${listView ? "text-2xl" : "text-xl"}`}>
                     {event.eventName}
                     {event.totalDays && event.totalDays > 1 && !listView && (
                       <span className="ml-2 text-sm text-gray-400">
@@ -125,7 +126,54 @@ const EventCard: FC<EventCardProps> = ({ event, uncollapsible = false, onClose, 
                     ))
                   )}
                 </div>
-                <div className="mt-1 flex flex-wrap gap-1">
+                {!listView && (
+                  <div className="mt-1 flex flex-wrap gap-1">
+                    {event.eventTypes.map((type) => (
+                      <span
+                        key={type}
+                        className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium border ${getBadgeClasses(
+                          type
+                        )}`}
+                      >
+                        <EventTypeIcon type={type} />
+                        <span className="ml-1">{type}</span>
+                      </span>
+                    ))}
+                  </div>
+                )}
+                {/* Daily schedule display */}
+                {listView && event.dailySchedule && event.dailySchedule.length > 0 && (
+                  <div className="mt-2 text-sm text-gray-400">
+                    {event.dailySchedule.slice(0, event.totalDays).map((day, index) => {
+                      // Create a new date by adding index days to the current date
+                      const dayDate = new Date(event.currentDate);
+                      dayDate.setDate(dayDate.getDate() + index);
+
+                      return (
+                        <div key={index} className="flex items-center gap-2 mb-1">
+                          <span>
+                            {new Date(dayDate).getDate()}{" "}
+                            {dayDate.toLocaleDateString("en-US", {
+                              month: "long",
+                            })}
+                            ,{" "}
+                            {dayDate.toLocaleDateString("en-US", {
+                              weekday: "short",
+                            })}
+                            {event.totalDays && event.totalDays > 1 ? ` (Day ${index + 1}/${event.totalDays})` : ""}:
+                          </span>
+                          <span>
+                            {day.startTime} - {day.endTime}
+                          </span>
+                        </div>
+                      );
+                    })}
+                  </div>
+                )}
+              </div>
+              {/* Only show time on the right for non-list views */}
+              {listView ? (
+                <div className="flex flex-col items-center gap-1 shrink-0">
                   {event.eventTypes.map((type) => (
                     <span
                       key={type}
@@ -138,15 +186,7 @@ const EventCard: FC<EventCardProps> = ({ event, uncollapsible = false, onClose, 
                     </span>
                   ))}
                 </div>
-                {/* Date display for list view */}
-                {listView && event.dateDisplay && (
-                  <div className="text-sm text-gray-400 mt-2">
-                    {event.dateDisplay} • {event.startTime} - {event.endTime}
-                  </div>
-                )}
-              </div>
-              {/* Only show time on the right for non-list views */}
-              {!listView && (
+              ) : (
                 <div className="flex flex-col items-center sm:items-end shrink-0">
                   <div className="text-lg text-gray-400">
                     {event.startTime} - {event.endTime}

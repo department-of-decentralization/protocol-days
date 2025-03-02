@@ -49,6 +49,7 @@ function transformEvents(data: ResponseData): Event[] {
       endDate.setDate(endDate.getDate() + days - 1);
       return endDate.toISOString();
     })(),
+    totalDays: Number(event["Number of Days"]) || 1,
     organizer: String(event["Organizer Name"] || ""),
     description: String(event["Event Description"] || ""),
     eventTypes: Array.isArray(event["Event Type"])

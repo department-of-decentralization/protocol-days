@@ -6,6 +6,7 @@ export interface Event {
   eventName: string;
   startDate: string;
   endDate: string;
+  totalDays: number;
   organizer: string;
   description: string;
   eventTypes: ("Conference" | "Hackathon" | "Meetup" | "Party" | "Coworking" | "Happy Hour" | "Other")[];
