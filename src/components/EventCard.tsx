@@ -5,7 +5,7 @@ import { FaDiscord, FaTelegram, FaLink, FaMapMarkerAlt } from "react-icons/fa";
 import { SiMatrix, SiSignal } from "react-icons/si";
 import { BsChatDots } from "react-icons/bs";
 import { LuCalendarPlus } from "react-icons/lu";
-import { IoChevronDown, IoChevronUp } from "react-icons/io5";
+import { IoChevronDown, IoChevronUp, IoClose } from "react-icons/io5";
 import { EventTypeIcon, getBadgeClasses } from "@/constants/eventTypes";
 import Image from "next/image";
 
@@ -16,9 +16,11 @@ interface EventCardProps {
     startTime: string;
     endTime: string;
     currentDate: string;
+    dateDisplay?: string;
   };
   uncollapsible?: boolean;
   onClose?: () => void;
+  listView?: boolean;
 }
 
 const generateGoogleCalendarLink = (event: EventCardProps["event"]) => {
@@ -51,7 +53,7 @@ const generateGoogleCalendarLink = (event: EventCardProps["event"]) => {
   return `https://calendar.google.com/calendar/render?${params.toString()}`;
 };
 
-const EventCard: FC<EventCardProps> = ({ event, uncollapsible = false }) => {
+const EventCard: FC<EventCardProps> = ({ event, uncollapsible = false, onClose, listView = false }) => {
   const [isExpanded, setIsExpanded] = useState(uncollapsible);
 
   const getChatIcon = () => {
@@ -98,18 +100,30 @@ const EventCard: FC<EventCardProps> = ({ event, uncollapsible = false }) => {
                 <div className="flex items-center gap-2">
                   <h3 className="text-xl font-bold text-white">
                     {event.eventName}
-                    {event.totalDays && event.totalDays > 1 && (
+                    {event.totalDays && event.totalDays > 1 && !listView && (
                       <span className="ml-2 text-sm text-gray-400">
                         Day {event.dayIndex}/{event.totalDays}
                       </span>
                     )}
                   </h3>
-                  {!uncollapsible &&
+                  {uncollapsible && onClose ? (
+                    <button
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        onClose();
+                      }}
+                      className="p-1 hover:bg-gray-800 rounded-full transition-colors"
+                    >
+                      <IoClose className="w-5 h-5 text-gray-400" />
+                    </button>
+                  ) : (
+                    !uncollapsible &&
                     (isExpanded ? (
                       <IoChevronUp className="w-5 h-5 text-gray-400" />
                     ) : (
                       <IoChevronDown className="w-5 h-5 text-gray-400" />
-                    ))}
+                    ))
+                  )}
                 </div>
                 <div className="mt-1 flex flex-wrap gap-1">
                   {event.eventTypes.map((type) => (
@@ -124,21 +138,30 @@ const EventCard: FC<EventCardProps> = ({ event, uncollapsible = false }) => {
                     </span>
                   ))}
                 </div>
-              </div>
-              <div className="flex flex-col items-center sm:items-end shrink-0">
-                <div className="text-lg text-gray-400">
-                  {event.startTime} - {event.endTime}
-                </div>
-                {uncollapsible && (
-                  <div className="text-sm text-gray-500">
-                    {new Date(event.currentDate).toLocaleDateString("en-US", {
-                      weekday: "long",
-                      month: "long",
-                      day: "numeric",
-                    })}
+                {/* Date display for list view */}
+                {listView && event.dateDisplay && (
+                  <div className="text-sm text-gray-400 mt-2">
+                    {event.dateDisplay} • {event.startTime} - {event.endTime}
                   </div>
                 )}
               </div>
+              {/* Only show time on the right for non-list views */}
+              {!listView && (
+                <div className="flex flex-col items-center sm:items-end shrink-0">
+                  <div className="text-lg text-gray-400">
+                    {event.startTime} - {event.endTime}
+                  </div>
+                  {uncollapsible && (
+                    <div className="text-sm text-gray-500">
+                      {new Date(event.currentDate).toLocaleDateString("en-US", {
+                        weekday: "long",
+                        month: "long",
+                        day: "numeric",
+                      })}
+                    </div>
+                  )}
+                </div>
+              )}
             </div>
           </div>
         </div>

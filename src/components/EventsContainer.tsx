@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Schedule from "../app/views/Schedule";
 import Days from "../app/views/Days";
+import EventList from "../app/views/EventList";
 import { Event } from "../app/views/Schedule";
 import { EVENT_TYPES, EventType, EventTypeIcon, getBadgeClasses } from "@/constants/eventTypes";
 
@@ -11,7 +12,7 @@ interface EventsContainerProps {
 }
 
 export default function EventsContainer({ events }: EventsContainerProps) {
-  const [view, setView] = useState<"timeline" | "days">("days");
+  const [view, setView] = useState<"events" | "timeline" | "days">("events");
   const [selectedTypes, setSelectedTypes] = useState<Set<EventType>>(new Set(EVENT_TYPES));
 
   const filteredEvents = events.filter((event) => event.eventTypes.some((type) => selectedTypes.has(type)));
@@ -117,6 +118,14 @@ export default function EventsContainer({ events }: EventsContainerProps) {
             Timeline
           </button>
           <button
+            onClick={() => setView("events")}
+            className={`px-4 py-2 rounded-md text-sm font-medium transition-colors ${
+              view === "events" ? "bg-primary-500 text-white" : "text-gray-400 hover:text-white"
+            }`}
+          >
+            Events
+          </button>
+          <button
             onClick={() => setView("days")}
             className={`px-4 py-2 rounded-md text-sm font-medium transition-colors ${
               view === "days" ? "bg-primary-500 text-white" : "text-gray-400 hover:text-white"
@@ -127,7 +136,13 @@ export default function EventsContainer({ events }: EventsContainerProps) {
         </div>
       </div>
 
-      {view === "timeline" ? <Schedule events={filteredEvents} /> : <Days events={filteredEvents} />}
+      {view === "events" ? (
+        <EventList events={filteredEvents} />
+      ) : view === "timeline" ? (
+        <Schedule events={filteredEvents} />
+      ) : (
+        <Days events={filteredEvents} />
+      )}
     </section>
   );
 }

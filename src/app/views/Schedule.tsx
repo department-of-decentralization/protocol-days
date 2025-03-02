@@ -13,13 +13,11 @@ export interface Event {
   venueAddress: string;
   venueLink?: string;
   eventLink: string;
-  logo: { url: string; filename: string }[] | null;
-  dailySchedule: {
-    startTime: string | null;
-    endTime: string | null;
-  }[];
   chatLink?: string;
   chatPlatform?: "Matrix" | "Telegram" | "Discord" | "Signal" | "Other";
+  logo: { url: string; filename: string }[] | null;
+  dailySchedule: { startTime: string | null; endTime: string | null }[];
+  submissionTime?: string;
 }
 
 export interface ProcessedEvent extends Omit<Event, "startDate" | "endDate"> {

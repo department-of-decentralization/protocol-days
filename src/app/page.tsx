@@ -27,7 +27,9 @@ interface ResponseData {
 function transformEvents(data: ResponseData): Event[] {
   // Transform the responses into a flattened format
   const flattenedEvents = data.responses.map((submission) => {
-    const event: Record<string, string | number | boolean | { url: string; filename: string }[] | null> = {};
+    const event: Record<string, string | number | boolean | { url: string; filename: string }[] | null> = {
+      submissionTime: submission.submissionTime,
+    };
 
     submission.questions.forEach((question) => {
       event[question.name] = question.value;
@@ -37,7 +39,7 @@ function transformEvents(data: ResponseData): Event[] {
   });
 
   // Transform the flattened events into the format needed by Schedule component
-  return flattenedEvents.map((event) => ({
+  const transformedEvents = flattenedEvents.map((event) => ({
     eventName: String(event["Event Name"] || ""),
     startDate: String(event["Event Start Date"] || ""),
     endDate: (() => {
@@ -65,7 +67,17 @@ function transformEvents(data: ResponseData): Event[] {
       startTime: event[`Day ${i + 1} - Start Time`] ? String(event[`Day ${i + 1} - Start Time`]) : null,
       endTime: event[`Day ${i + 1} - End Time`] ? String(event[`Day ${i + 1} - End Time`]) : null,
     })),
+    submissionTime: String(event["submissionTime"] || ""),
   }));
+
+  // Sort events by submission time (newest first)
+  transformedEvents.sort((a, b) => {
+    if (!a.submissionTime) return 1; // If a has no submission time, put it at the end
+    if (!b.submissionTime) return -1; // If b has no submission time, put it at the end
+    return new Date(a.submissionTime).getTime() - new Date(b.submissionTime).getTime();
+  });
+
+  return transformedEvents as Event[];
 }
 
 const EVENTS_FETCH_URL = "https://europe-west1-ethberlin-dystopian-faces.cloudfunctions.net/bbw2025-get-fillout-events";
