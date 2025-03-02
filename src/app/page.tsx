@@ -104,7 +104,7 @@ export default function Home() {
   }, []);
 
   return (
-    <div className="flex flex-col items-center justify-items-center min-h-screen max-w-screen p-1 mx-4 sm:mx-0 sm:p-8 pb-20 font-[family-name:var(--font-geist-sans)] bg-black text-white">
+    <div className="flex flex-col items-center justify-items-center min-h-screen max-w-screen p-1 px-4 sm:px-0 sm:p-8 pb-20 font-[family-name:var(--font-geist-sans)] bg-black text-white">
       <a
         href="https://github.com/blockchainweek/2025"
         target="_blank"
