@@ -106,33 +106,35 @@ export default function EventsContainer({ events }: EventsContainerProps) {
         </div>
       </div>
 
-      {/* View Toggle */}
-      <div className="flex justify-center mb-8">
-        <div className="inline-flex rounded-lg border border-gray-700 p-1">
-          <button
-            onClick={() => setView("timeline")}
-            className={`px-4 py-2 rounded-md text-sm font-medium transition-colors ${
-              view === "timeline" ? "bg-primary-500 text-white" : "text-gray-400 hover:text-white"
-            }`}
-          >
-            Timeline
-          </button>
-          <button
-            onClick={() => setView("events")}
-            className={`px-4 py-2 rounded-md text-sm font-medium transition-colors ${
-              view === "events" ? "bg-primary-500 text-white" : "text-gray-400 hover:text-white"
-            }`}
-          >
-            Events
-          </button>
-          <button
-            onClick={() => setView("days")}
-            className={`px-4 py-2 rounded-md text-sm font-medium transition-colors ${
-              view === "days" ? "bg-primary-500 text-white" : "text-gray-400 hover:text-white"
-            }`}
-          >
-            Days
-          </button>
+      {/* View Toggle - Now Sticky */}
+      <div className="sticky top-0 z-10 py-4 bg-black/80 backdrop-blur-sm w-full">
+        <div className="flex justify-center">
+          <div className="inline-flex rounded-lg border border-gray-700 p-1">
+            <button
+              onClick={() => setView("timeline")}
+              className={`px-4 py-2 rounded-md text-sm font-medium transition-colors ${
+                view === "timeline" ? "bg-primary-500 text-white" : "text-gray-400 hover:text-white"
+              }`}
+            >
+              Timeline
+            </button>
+            <button
+              onClick={() => setView("events")}
+              className={`px-4 py-2 rounded-md text-sm font-medium transition-colors ${
+                view === "events" ? "bg-primary-500 text-white" : "text-gray-400 hover:text-white"
+              }`}
+            >
+              Events
+            </button>
+            <button
+              onClick={() => setView("days")}
+              className={`px-4 py-2 rounded-md text-sm font-medium transition-colors ${
+                view === "days" ? "bg-primary-500 text-white" : "text-gray-400 hover:text-white"
+              }`}
+            >
+              Days
+            </button>
+          </div>
         </div>
       </div>
 

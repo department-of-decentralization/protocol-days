@@ -51,7 +51,7 @@ const Days: FC<DaysProps> = ({ events }) => {
         const displayDate = new Date(date);
         return (
           <div key={date} className="space-y-6">
-            <div className="sticky top-0 z-10 -mx-4 px-4 py-2 bg-black/80 backdrop-blur-sm">
+            <div className="sticky top-16 z-10 -mx-4 px-4 py-2 bg-black/80 backdrop-blur-sm">
               <h2 className="text-2xl font-bold text-white">
                 {displayDate.toLocaleDateString("en-US", {
                   weekday: "long",
