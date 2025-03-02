@@ -2,11 +2,11 @@ import { FC } from "react";
 import { Event } from "./Schedule";
 import EventCard from "./EventCard";
 
-interface EventListProps {
+interface DaysProps {
   events: Event[];
 }
 
-const EventList: FC<EventListProps> = ({ events }) => {
+const Days: FC<DaysProps> = ({ events }) => {
   // Split multi-day events into separate day events
   const splitEvents = events.flatMap((event) => {
     const startDate = new Date(event.startDate);
@@ -74,4 +74,4 @@ const EventList: FC<EventListProps> = ({ events }) => {
   );
 };
 
-export default EventList;
+export default Days;

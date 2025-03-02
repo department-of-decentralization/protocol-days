@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import Schedule from "./Schedule";
-import EventList from "./EventList";
+import Days from "./Days";
 import { Event } from "./Schedule";
 import { EVENT_TYPES, EventType, EventTypeIcon, getBadgeClasses } from "@/constants/eventTypes";
 
@@ -127,7 +127,7 @@ export default function EventsContainer({ events }: EventsContainerProps) {
         </div>
       </div>
 
-      {view === "timeline" ? <Schedule events={filteredEvents} /> : <EventList events={filteredEvents} />}
+      {view === "timeline" ? <Schedule events={filteredEvents} /> : <Days events={filteredEvents} />}
     </section>
   );
 }
