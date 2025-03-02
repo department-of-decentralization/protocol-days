@@ -112,7 +112,7 @@ export default function EventsContainer({ events }: EventsContainerProps) {
           <div className="inline-flex rounded-lg border border-gray-700 p-1">
             <button
               onClick={() => setView("timeline")}
-              className={`px-4 py-2 rounded-md text-sm font-medium transition-colors ${
+              className={`w-24 px-4 py-2 rounded-md text-sm font-medium transition-colors ${
                 view === "timeline" ? "bg-primary-500 text-white" : "text-gray-400 hover:text-white"
               }`}
             >
@@ -120,7 +120,7 @@ export default function EventsContainer({ events }: EventsContainerProps) {
             </button>
             <button
               onClick={() => setView("events")}
-              className={`px-4 py-2 rounded-md text-sm font-medium transition-colors ${
+              className={`w-24 px-4 py-2 rounded-md text-sm font-medium transition-colors ${
                 view === "events" ? "bg-primary-500 text-white" : "text-gray-400 hover:text-white"
               }`}
             >
@@ -128,7 +128,7 @@ export default function EventsContainer({ events }: EventsContainerProps) {
             </button>
             <button
               onClick={() => setView("days")}
-              className={`px-4 py-2 rounded-md text-sm font-medium transition-colors ${
+              className={`w-24 px-4 py-2 rounded-md text-sm font-medium transition-colors ${
                 view === "days" ? "bg-primary-500 text-white" : "text-gray-400 hover:text-white"
               }`}
             >
