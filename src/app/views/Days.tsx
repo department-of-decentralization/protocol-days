@@ -1,6 +1,6 @@
 import { FC } from "react";
 import { Event } from "./Schedule";
-import EventCard from "./EventCard";
+import EventCard from "../../components/EventCard";
 
 interface DaysProps {
   events: Event[];

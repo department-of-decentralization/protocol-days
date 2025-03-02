@@ -1,5 +1,5 @@
 import { FC, useState, useEffect } from "react";
-import EventCard from "./EventCard";
+import EventCard from "../../components/EventCard";
 import { IoClose } from "react-icons/io5";
 import Image from "next/image";
 export interface Event {

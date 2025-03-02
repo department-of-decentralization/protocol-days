@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import EventsContainer from "@/components/EventsContainer";
-import { Event } from "@/components/Schedule";
+import { Event } from "@/app/views/Schedule";
 import { useEffect, useState } from "react";
 
 interface Question {

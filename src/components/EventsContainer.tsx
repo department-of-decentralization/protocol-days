@@ -1,9 +1,9 @@
 "use client";
 
 import { useState } from "react";
-import Schedule from "./Schedule";
-import Days from "./Days";
-import { Event } from "./Schedule";
+import Schedule from "../app/views/Schedule";
+import Days from "../app/views/Days";
+import { Event } from "../app/views/Schedule";
 import { EVENT_TYPES, EventType, EventTypeIcon, getBadgeClasses } from "@/constants/eventTypes";
 
 interface EventsContainerProps {

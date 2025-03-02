@@ -1,6 +1,6 @@
 import { FC, useState } from "react";
 import ReactMarkdown from "react-markdown";
-import { Event } from "./Schedule";
+import { Event } from "../app/views/Schedule";
 import { FaDiscord, FaTelegram, FaLink, FaMapMarkerAlt } from "react-icons/fa";
 import { SiMatrix, SiSignal } from "react-icons/si";
 import { BsChatDots } from "react-icons/bs";
