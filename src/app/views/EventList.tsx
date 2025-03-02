@@ -20,7 +20,7 @@ const EventList: FC<EventListProps> = ({ events }) => {
 
   return (
     <div className="w-full max-w-4xl mx-auto">
-      <div className="grid gap-6 mx-4 sm:mx-0">
+      <div className="grid gap-6  ">
         {formattedEvents.map((event, index) => (
           <div key={`${event.eventName}-${index}`} className="relative">
             <EventCard event={event} listView={true} />

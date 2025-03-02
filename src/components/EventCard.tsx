@@ -87,7 +87,9 @@ const EventCard: FC<EventCardProps> = ({ event, uncollapsible = false, onClose, 
               <Image
                 src={event.logo[0].url}
                 alt=""
-                className={`object-contain rounded ${listView ? "w-32 h-32" : "w-24 h-24 sm:w-16 sm:h-16 "}`}
+                className={`object-contain rounded ${
+                  listView ? "w-24 h-24 sm:w-32 sm:h-32" : "w-24 h-24 sm:w-16 sm:h-16 "
+                }`}
                 width={listView ? 128 : 96}
                 height={listView ? 128 : 96}
               />
@@ -96,7 +98,7 @@ const EventCard: FC<EventCardProps> = ({ event, uncollapsible = false, onClose, 
 
           <div className="flex-1 min-w-0">
             {/* Header Section - Always visible */}
-            <div className="flex flex-col sm:flex-row justify-between gap-2 sm:gap-4 text-center sm:text-left items-center sm:items-start">
+            <div className="flex flex-col-reverse sm:flex-row justify-between gap-2 sm:gap-4 text-center sm:text-left items-center sm:items-start">
               <div className="flex flex-col items-center sm:items-start gap-1">
                 <div className="flex items-center gap-2">
                   <h3 className={`font-bold text-white ${listView ? "text-2xl" : "text-xl"}`}>
