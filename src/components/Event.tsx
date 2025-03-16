@@ -21,6 +21,7 @@ interface EventProps {
   uncollapsible?: boolean;
   onClose?: () => void;
   listView?: boolean;
+  hideCalendar?: boolean;
 }
 
 const generateGoogleCalendarLink = (event: EventProps["event"]) => {
@@ -53,7 +54,7 @@ const generateGoogleCalendarLink = (event: EventProps["event"]) => {
   return `https://calendar.google.com/calendar/render?${params.toString()}`;
 };
 
-const Event: FC<EventProps> = ({ event, uncollapsible = false, onClose, listView = false }) => {
+const Event: FC<EventProps> = ({ event, uncollapsible = false, onClose, listView = false, hideCalendar = false }) => {
   const [isExpanded, setIsExpanded] = useState(uncollapsible);
 
   const getChatIcon = () => {
@@ -87,7 +88,7 @@ const Event: FC<EventProps> = ({ event, uncollapsible = false, onClose, listView
                 src={event.logo[0].url}
                 alt=""
                 className={`object-contain rounded ${
-                  listView ? "w-24 h-24 sm:w-32 sm:h-32" : "w-24 h-24 sm:w-16 sm:h-16 "
+                  listView ? "w-16 h-16 sm:w-24 sm:h-24" : "w-16 h-16 sm:w-16 sm:h-16 "
                 }`}
                 width={listView ? 128 : 96}
                 height={listView ? 128 : 96}
@@ -103,32 +104,25 @@ const Event: FC<EventProps> = ({ event, uncollapsible = false, onClose, listView
                   <h3 className={`font-bold text-white ${listView ? "text-2xl" : "text-xl"}`}>
                     {event.eventName}
                     {event.totalDays && event.totalDays > 1 && !listView && (
-                      <span className="ml-2 text-sm text-gray-400">
+                      <span className="hidden sm:inline ml-2 text-sm text-gray-400">
                         Day {event.dayIndex}/{event.totalDays}
                       </span>
                     )}
                   </h3>
-                  {uncollapsible && onClose ? (
-                    <button
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        onClose();
-                      }}
-                      className="p-1 hover:bg-gray-800 rounded-full transition-colors"
-                    >
-                      <IoClose className="w-5 h-5 text-gray-400" />
-                    </button>
-                  ) : (
-                    !uncollapsible &&
+                  {!uncollapsible &&
                     (isExpanded ? (
                       <IoChevronUp className="w-5 h-5 text-gray-400" />
                     ) : (
                       <IoChevronDown className="w-5 h-5 text-gray-400" />
-                    ))
-                  )}
+                    ))}
                 </div>
+                {event.totalDays && event.totalDays > 1 && !listView && (
+                  <div className="sm:hidden ml-2 text-sm text-gray-400">
+                    Day {event.dayIndex}/{event.totalDays}
+                  </div>
+                )}
                 {!listView && (
-                  <div className="mt-1 flex flex-wrap gap-1">
+                  <div className="mt-1 flex justify-center sm:justify-start flex-wrap gap-1">
                     {event.eventTypes.map((type) => (
                       <span
                         key={type}
@@ -253,15 +247,17 @@ const Event: FC<EventProps> = ({ event, uncollapsible = false, onClose, listView
                 <FaLink className="w-4 h-4" />
                 Event Link
               </a>
-              <a
-                href={generateGoogleCalendarLink(event)}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-full sm:w-auto flex items-center justify-center gap-2 px-4 py-2 bg-gray-800 hover:bg-gray-700 text-white font-medium rounded-md transition-colors"
-              >
-                <LuCalendarPlus className="w-4 h-4" />
-                Add to Calendar
-              </a>
+              {!hideCalendar && (
+                <a
+                  href={generateGoogleCalendarLink(event)}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-full sm:w-auto flex items-center justify-center gap-2 px-4 py-2 bg-gray-800 hover:bg-gray-700 text-white font-medium rounded-md transition-colors"
+                >
+                  <LuCalendarPlus className="w-4 h-4" />
+                  Add to Calendar
+                </a>
+              )}
             </div>
             {event.chatLink && (
               <a

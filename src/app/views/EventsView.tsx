@@ -1,6 +1,6 @@
 import { FC } from "react";
 import { EventType } from "./Schedule";
-import Event from "@/components/Event";
+import EventCard from "@/components/EventCard";
 
 interface EventsViewProps {
   events: EventType[];
@@ -19,11 +19,11 @@ const EventsView: FC<EventsViewProps> = ({ events }) => {
   });
 
   return (
-    <div className="w-full max-w-4xl mx-auto">
-      <div className="grid gap-6  ">
+    <div className="w-full max-w-7xl mx-auto">
+      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6">
         {formattedEvents.map((event, index) => (
-          <div key={`${event.eventName}-${index}`} className="relative">
-            <Event event={event} listView={true} />
+          <div key={`${event.eventName}-${index}`} className="h-full">
+            <EventCard event={event} />
           </div>
         ))}
       </div>
