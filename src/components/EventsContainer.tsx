@@ -60,7 +60,7 @@ export default function EventsContainer({ events }: EventsContainerProps) {
       </div>
 
       {/* Filter Bar */}
-      <div className="flex flex-col items-center mb-8 gap-4">
+      <div className="flex flex-col items-center gap-4">
         <p className="text-gray-400 text-sm">Select event types below to filter</p>
         <div className="flex flex-wrap justify-center gap-2 max-w-4xl">
           {EVENT_TYPES.map((type) => {
