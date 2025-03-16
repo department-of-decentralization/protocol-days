@@ -8,7 +8,7 @@ interface EventsViewProps {
 
 const EventsView: FC<EventsViewProps> = ({ events }) => {
   // Format events with date information without sorting
-  console.log("All events:", events);
+  // console.log("All events:", events);
   const formattedEvents = events.map((event) => {
     const startDate = new Date(event.startDate);
 

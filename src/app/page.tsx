@@ -65,7 +65,7 @@ function transformEvents(data: ResponseData): EventType[] {
       ? (String(event["Event Group Chat Platform"]) as EventType["chatPlatform"])
       : undefined,
     logo: Array.isArray(event["Logo"]) ? (event["Logo"] as { url: string; filename: string }[]) : null,
-    dailySchedule: Array.from({ length: 7 }, (_, i) => ({
+    dailySchedule: Array.from({ length: Number(event["Number of Days"]) || 1 }, (_, i) => ({
       startTime: event[`Day ${i + 1} - Start Time`] ? String(event[`Day ${i + 1} - Start Time`]) : null,
       endTime: event[`Day ${i + 1} - End Time`] ? String(event[`Day ${i + 1} - End Time`]) : null,
     })),
