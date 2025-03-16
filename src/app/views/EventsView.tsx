@@ -2,11 +2,11 @@ import { FC } from "react";
 import { EventType } from "./Schedule";
 import Event from "@/components/Event";
 
-interface EventListProps {
+interface EventsViewProps {
   events: EventType[];
 }
 
-const EventList: FC<EventListProps> = ({ events }) => {
+const EventsView: FC<EventsViewProps> = ({ events }) => {
   // Format events with date information without sorting
   console.log("All events:", events);
   const formattedEvents = events.map((event) => {
@@ -31,4 +31,4 @@ const EventList: FC<EventListProps> = ({ events }) => {
   );
 };
 
-export default EventList;
+export default EventsView;

@@ -3,7 +3,7 @@
 import { useState } from "react";
 import Schedule from "../app/views/Schedule";
 import Days from "../app/views/Days";
-import EventList from "../app/views/EventList";
+import EventsView from "../app/views/EventsView";
 import { EventType } from "../app/views/Schedule";
 import { EVENT_TYPES, EventFormat, EventTypeIcon, getBadgeClasses } from "@/constants/eventTypes";
 
@@ -125,7 +125,7 @@ export default function EventsContainer({ events }: EventsContainerProps) {
       </div>
 
       {view === "events" ? (
-        <EventList events={filteredEvents} />
+        <EventsView events={filteredEvents} />
       ) : view === "timeline" ? (
         <Schedule events={filteredEvents} />
       ) : (
