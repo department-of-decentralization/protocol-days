@@ -1,9 +1,9 @@
 import { FC } from "react";
-import { Event } from "./Schedule";
-import EventCard from "@/components/EventCard";
+import { EventType } from "./Schedule";
+import Event from "@/components/Event";
 
 interface EventListProps {
-  events: Event[];
+  events: EventType[];
 }
 
 const EventList: FC<EventListProps> = ({ events }) => {
@@ -23,7 +23,7 @@ const EventList: FC<EventListProps> = ({ events }) => {
       <div className="grid gap-6  ">
         {formattedEvents.map((event, index) => (
           <div key={`${event.eventName}-${index}`} className="relative">
-            <EventCard event={event} listView={true} />
+            <Event event={event} listView={true} />
           </div>
         ))}
       </div>

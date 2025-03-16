@@ -1,9 +1,9 @@
 import { FC } from "react";
-import { Event } from "./Schedule";
-import EventCard from "../../components/EventCard";
+import { EventType } from "./Schedule";
+import Event from "../../components/Event";
 
 interface DaysProps {
-  events: Event[];
+  events: EventType[];
 }
 
 const Days: FC<DaysProps> = ({ events }) => {
@@ -62,7 +62,7 @@ const Days: FC<DaysProps> = ({ events }) => {
             </div>
 
             {dateEvents.map((event, index) => (
-              <EventCard key={`${event.eventName}-${index}`} event={event} />
+              <Event key={`${event.eventName}-${index}`} event={event} />
             ))}
           </div>
         );

@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import EventsContainer from "@/components/EventsContainer";
-import { Event } from "@/app/views/Schedule";
+import { EventType } from "@/app/views/Schedule";
 import { useEffect, useState } from "react";
 import { LuCalendarPlus } from "react-icons/lu";
 
@@ -25,7 +25,7 @@ interface ResponseData {
   pageCount: number;
 }
 
-function transformEvents(data: ResponseData): Event[] {
+function transformEvents(data: ResponseData): EventType[] {
   // Transform the responses into a flattened format
   const flattenedEvents = data.responses.map((submission) => {
     const event: Record<string, string | number | boolean | { url: string; filename: string }[] | null> = {
@@ -54,7 +54,7 @@ function transformEvents(data: ResponseData): Event[] {
     organizer: String(event["Organizer Name"] || ""),
     description: String(event["Event Description"] || ""),
     eventTypes: Array.isArray(event["Event Type"])
-      ? (event["Event Type"] as unknown as Event["eventTypes"])
+      ? (event["Event Type"] as unknown as EventType["eventTypes"])
       : ["Other"],
     venue: String(event["Venue Name"] || ""),
     venueAddress: String(event["Venue Address"] || ""),
@@ -62,7 +62,7 @@ function transformEvents(data: ResponseData): Event[] {
     eventLink: String(event["Event Link/Website"] || ""),
     chatLink: event["Link to Event Group Chat"] ? String(event["Link to Event Group Chat"]) : undefined,
     chatPlatform: event["Event Group Chat Platform"]
-      ? (String(event["Event Group Chat Platform"]) as Event["chatPlatform"])
+      ? (String(event["Event Group Chat Platform"]) as EventType["chatPlatform"])
       : undefined,
     logo: Array.isArray(event["Logo"]) ? (event["Logo"] as { url: string; filename: string }[]) : null,
     dailySchedule: Array.from({ length: 7 }, (_, i) => ({
@@ -79,13 +79,13 @@ function transformEvents(data: ResponseData): Event[] {
     return new Date(a.submissionTime).getTime() - new Date(b.submissionTime).getTime();
   });
 
-  return transformedEvents as Event[];
+  return transformedEvents as EventType[];
 }
 
 const EVENTS_FETCH_URL = "https://europe-west1-ethberlin-dystopian-faces.cloudfunctions.net/bbw2025-get-fillout-events";
 
 export default function Home() {
-  const [events, setEvents] = useState<Event[]>([]);
+  const [events, setEvents] = useState<EventType[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [message, setMessage] = useState<string | null>("Loading events...");
 

@@ -4,16 +4,16 @@ import { useState } from "react";
 import Schedule from "../app/views/Schedule";
 import Days from "../app/views/Days";
 import EventList from "../app/views/EventList";
-import { Event } from "../app/views/Schedule";
-import { EVENT_TYPES, EventType, EventTypeIcon, getBadgeClasses } from "@/constants/eventTypes";
+import { EventType } from "../app/views/Schedule";
+import { EVENT_TYPES, EventFormat, EventTypeIcon, getBadgeClasses } from "@/constants/eventTypes";
 
 interface EventsContainerProps {
-  events: Event[];
+  events: EventType[];
 }
 
 export default function EventsContainer({ events }: EventsContainerProps) {
   const [view, setView] = useState<"events" | "timeline" | "days">("events");
-  const [selectedTypes, setSelectedTypes] = useState<Set<EventType>>(new Set(EVENT_TYPES));
+  const [selectedTypes, setSelectedTypes] = useState<Set<EventFormat>>(new Set(EVENT_TYPES));
 
   const filteredEvents = events.filter((event) => event.eventTypes.some((type) => selectedTypes.has(type)));
 
@@ -23,11 +23,11 @@ export default function EventsContainer({ events }: EventsContainerProps) {
     byType: EVENT_TYPES.reduce((acc, type) => {
       acc[type] = events.filter((event) => event.eventTypes.includes(type)).length;
       return acc;
-    }, {} as Record<EventType, number>),
+    }, {} as Record<EventFormat, number>),
     filtered: filteredEvents.length,
   };
 
-  const toggleEventType = (type: EventType) => {
+  const toggleEventType = (type: EventFormat) => {
     setSelectedTypes((prev) => {
       const newSet = new Set(prev);
       if (newSet.has(type)) {

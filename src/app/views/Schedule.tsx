@@ -1,8 +1,8 @@
 import { FC, useState, useEffect } from "react";
-import EventCard from "../../components/EventCard";
+import Event from "../../components/Event";
 import { IoClose } from "react-icons/io5";
 import Image from "next/image";
-export interface Event {
+export interface EventType {
   eventName: string;
   startDate: string;
   endDate: string;
@@ -21,7 +21,7 @@ export interface Event {
   submissionTime?: string;
 }
 
-export interface ProcessedEvent extends Omit<Event, "startDate" | "endDate"> {
+export interface ProcessedEvent extends Omit<EventType, "startDate" | "endDate"> {
   startDate: Date;
   endDate: Date;
   dayIndex: number;
@@ -33,7 +33,7 @@ export interface ProcessedEvent extends Omit<Event, "startDate" | "endDate"> {
 }
 
 interface ScheduleProps {
-  events: Event[];
+  events: EventType[];
 }
 
 const START_DATE = new Date("2025-06-08");
@@ -292,7 +292,7 @@ const Schedule: FC<ScheduleProps> = ({ events }) => {
             >
               <IoClose className="w-6 h-6 text-gray-400 hover:text-white" />
             </button>
-            <EventCard
+            <Event
               event={{
                 ...selectedEvent,
                 startDate: selectedEvent.startDate.toISOString(),

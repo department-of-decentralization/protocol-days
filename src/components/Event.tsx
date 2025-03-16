@@ -1,6 +1,6 @@
 import { FC, useState } from "react";
 import ReactMarkdown from "react-markdown";
-import { Event } from "../app/views/Schedule";
+import { EventType } from "../app/views/Schedule";
 import { FaDiscord, FaTelegram, FaLink, FaMapMarkerAlt } from "react-icons/fa";
 import { SiMatrix, SiSignal } from "react-icons/si";
 import { BsChatDots } from "react-icons/bs";
@@ -9,8 +9,8 @@ import { IoChevronDown, IoChevronUp, IoClose } from "react-icons/io5";
 import { EventTypeIcon, getBadgeClasses } from "@/constants/eventTypes";
 import Image from "next/image";
 
-interface EventCardProps {
-  event: Event & {
+interface EventProps {
+  event: EventType & {
     dayIndex?: number;
     totalDays?: number;
     startTime?: string;
@@ -23,7 +23,7 @@ interface EventCardProps {
   listView?: boolean;
 }
 
-const generateGoogleCalendarLink = (event: EventCardProps["event"]) => {
+const generateGoogleCalendarLink = (event: EventProps["event"]) => {
   const dateStr = event.currentDate.split("T")[0];
   const startDateTime = `${dateStr}T${event.startTime}:00`;
   const endDateTime = `${dateStr}T${event.endTime}:00`;
@@ -53,7 +53,7 @@ const generateGoogleCalendarLink = (event: EventCardProps["event"]) => {
   return `https://calendar.google.com/calendar/render?${params.toString()}`;
 };
 
-const EventCard: FC<EventCardProps> = ({ event, uncollapsible = false, onClose, listView = false }) => {
+const Event: FC<EventProps> = ({ event, uncollapsible = false, onClose, listView = false }) => {
   const [isExpanded, setIsExpanded] = useState(uncollapsible);
 
   const getChatIcon = () => {
@@ -281,4 +281,4 @@ const EventCard: FC<EventCardProps> = ({ event, uncollapsible = false, onClose, 
   );
 };
 
-export default EventCard;
+export default Event;

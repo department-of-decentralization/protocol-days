@@ -4,13 +4,13 @@ import { BsThreeDots } from "react-icons/bs";
 
 export const EVENT_TYPES = ["Conference", "Hackathon", "Meetup", "Party", "Coworking", "Happy Hour", "Other"] as const;
 
-export type EventType = (typeof EVENT_TYPES)[number];
+export type EventFormat = (typeof EVENT_TYPES)[number];
 
 type BadgeConfig = {
   baseColor: string;
 };
 
-export const EVENT_TYPE_BADGES: Record<EventType, BadgeConfig> = {
+export const EVENT_TYPE_BADGES: Record<EventFormat, BadgeConfig> = {
   Conference: {
     baseColor: "blue",
   },
@@ -34,7 +34,7 @@ export const EVENT_TYPE_BADGES: Record<EventType, BadgeConfig> = {
   },
 };
 
-export const getEventIcon = (type: EventType) => {
+export const getEventIcon = (type: EventFormat) => {
   switch (type) {
     case "Conference":
       return <FaUsers className="w-4 h-4" />;
@@ -53,11 +53,11 @@ export const getEventIcon = (type: EventType) => {
   }
 };
 
-export const EventTypeIcon = ({ type }: { type: EventType }) => {
+export const EventTypeIcon = ({ type }: { type: EventFormat }) => {
   return <span>{getEventIcon(type)}</span>;
 };
 
-export const getBadgeClasses = (type: EventType) => {
+export const getBadgeClasses = (type: EventFormat) => {
   const badge = EVENT_TYPE_BADGES[type];
   return `bg-${badge.baseColor}-500/10 text-${badge.baseColor}-400 border-${badge.baseColor}-500/20`;
 };
