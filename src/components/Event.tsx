@@ -5,7 +5,7 @@ import { FaDiscord, FaTelegram, FaLink, FaMapMarkerAlt } from "react-icons/fa";
 import { SiMatrix, SiSignal } from "react-icons/si";
 import { BsChatDots } from "react-icons/bs";
 import { LuCalendarPlus } from "react-icons/lu";
-import { IoChevronDown, IoChevronUp, IoClose } from "react-icons/io5";
+import { IoChevronDown, IoChevronUp } from "react-icons/io5";
 import { EventTypeIcon, getBadgeClasses } from "@/constants/eventTypes";
 import Image from "next/image";
 
@@ -19,7 +19,6 @@ interface EventProps {
     dateDisplay?: string;
   };
   uncollapsible?: boolean;
-  onClose?: () => void;
   listView?: boolean;
   hideCalendar?: boolean;
 }
@@ -54,7 +53,7 @@ const generateGoogleCalendarLink = (event: EventProps["event"]) => {
   return `https://calendar.google.com/calendar/render?${params.toString()}`;
 };
 
-const Event: FC<EventProps> = ({ event, uncollapsible = false, onClose, listView = false, hideCalendar = false }) => {
+const Event: FC<EventProps> = ({ event, uncollapsible = false, listView = false, hideCalendar = false }) => {
   const [isExpanded, setIsExpanded] = useState(uncollapsible);
 
   const getChatIcon = () => {

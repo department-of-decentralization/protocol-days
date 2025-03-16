@@ -122,7 +122,6 @@ const EventCard: FC<EventCardProps> = ({ event }) => {
               }}
               listView={true}
               uncollapsible={true}
-              onClose={() => setShowEventDetails(false)}
               hideCalendar={true}
             />
           </div>
