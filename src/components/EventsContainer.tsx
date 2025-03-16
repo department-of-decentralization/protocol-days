@@ -50,26 +50,12 @@ export default function EventsContainer({ events }: EventsContainerProps) {
   return (
     <section className="w-full">
       {/* Stats Section */}
-      <div className="flex flex-col items-center mt-8 mb-12 text-center">
-        <div className="mb-6">
+      <div className="flex flex-col items-center text-center">
+        <div className="">
           <h2 className="text-2xl font-bold text-white mb-2">
             <div className="text-8xl font-bold">{eventStats.total}</div>
             <div className="text-2xl">events</div>
           </h2>
-          <div className="flex flex-wrap justify-center gap-x-6 gap-y-2 text-sm text-gray-400 mt-4">
-            {EVENT_TYPES.map((type) => {
-              const count = eventStats.byType[type];
-              if (count === 0) return null; // Don't show types with no events
-              return (
-                <div key={type} className="flex items-center gap-1.5">
-                  <EventTypeIcon type={type} />
-                  <span>
-                    {type}: <span className="text-gray-300">{count}</span>
-                  </span>
-                </div>
-              );
-            })}
-          </div>
         </div>
       </div>
 
