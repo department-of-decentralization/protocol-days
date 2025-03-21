@@ -4,6 +4,7 @@ import { EventType } from "../app/views/Schedule";
 import { EventTypeIcon, getBadgeClasses } from "@/constants/eventTypes";
 import Event from "./Event";
 import { IoClose } from "react-icons/io5";
+import { BerlinDate } from "@/utils/BerlinDate";
 
 interface EventCardProps {
   event: EventType & {
@@ -15,10 +16,10 @@ const EventCard: FC<EventCardProps> = ({ event }) => {
   const [showEventDetails, setShowEventDetails] = useState(false);
 
   // Format dates for display
-  const startDate = new Date(event.startDate);
-  const endDate = new Date(event.endDate);
+  const startDate = new BerlinDate(event.startDate);
+  const endDate = new BerlinDate(event.endDate);
 
-  const formatDay = (date: Date) => {
+  const formatDay = (date: BerlinDate) => {
     return date.getDate();
   };
 

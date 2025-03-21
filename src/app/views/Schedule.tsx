@@ -2,6 +2,8 @@ import { FC, useState, useEffect } from "react";
 import Event from "../../components/Event";
 import { IoClose } from "react-icons/io5";
 import Image from "next/image";
+import { BerlinDate } from "@/utils/BerlinDate";
+
 export interface EventType {
   eventName: string;
   startDate: string;
@@ -22,8 +24,8 @@ export interface EventType {
 }
 
 export interface ProcessedEvent extends Omit<EventType, "startDate" | "endDate"> {
-  startDate: Date;
-  endDate: Date;
+  startDate: BerlinDate;
+  endDate: BerlinDate;
   dayIndex: number;
   totalDays: number;
   currentDate: string;
@@ -36,8 +38,8 @@ interface ScheduleProps {
   events: EventType[];
 }
 
-const START_DATE = new Date("2025-06-08");
-const END_DATE = new Date("2025-06-22");
+const START_DATE = new BerlinDate("2025-06-08");
+const END_DATE = new BerlinDate("2025-06-22");
 const MINUTES_PER_CHUNK = 15;
 const CHUNK_HEIGHT = 10; // height in pixels for each 15-min chunk
 const MINUTES_PER_DAY = 24 * 60;
@@ -61,12 +63,12 @@ const Schedule: FC<ScheduleProps> = ({ events }) => {
 
   // Split multi-day events into separate day events
   const splitEvents = events.flatMap((event) => {
-    const startDate = new Date(event.startDate);
-    const endDate = new Date(event.endDate);
+    const startDate = new BerlinDate(event.startDate);
+    const endDate = new BerlinDate(event.endDate);
     const days = Math.ceil((endDate.getTime() - startDate.getTime()) / (1000 * 60 * 60 * 24)) + 1;
 
     return Array.from({ length: days }, (_, index) => {
-      const currentDate = new Date(startDate);
+      const currentDate = BerlinDate.from(startDate);
       currentDate.setDate(currentDate.getDate() + index);
 
       // Get the start and end times for this day from dailySchedule
@@ -87,10 +89,10 @@ const Schedule: FC<ScheduleProps> = ({ events }) => {
   const eventsOverlap = (a: ProcessedEvent, b: ProcessedEvent) => {
     if (a.currentDate !== b.currentDate) return false;
 
-    const aStart = new Date(`${a.currentDate.split("T")[0]}T${a.startTime}`);
-    const aEnd = new Date(`${a.currentDate.split("T")[0]}T${a.endTime}`);
-    const bStart = new Date(`${b.currentDate.split("T")[0]}T${b.startTime}`);
-    const bEnd = new Date(`${b.currentDate.split("T")[0]}T${b.endTime}`);
+    const aStart = new BerlinDate(`${a.currentDate.split("T")[0]}T${a.startTime}`);
+    const aEnd = new BerlinDate(`${a.currentDate.split("T")[0]}T${a.endTime}`);
+    const bStart = new BerlinDate(`${b.currentDate.split("T")[0]}T${b.startTime}`);
+    const bEnd = new BerlinDate(`${b.currentDate.split("T")[0]}T${b.endTime}`);
 
     return aStart < bEnd && aEnd > bStart;
   };
@@ -98,13 +100,13 @@ const Schedule: FC<ScheduleProps> = ({ events }) => {
   // Convert to ProcessedEvent
   const processedEvents: ProcessedEvent[] = splitEvents.map((event) => ({
     ...event,
-    startDate: new Date(event.startDate),
-    endDate: new Date(event.endDate),
+    startDate: new BerlinDate(event.startDate),
+    endDate: new BerlinDate(event.endDate),
   })) as ProcessedEvent[];
 
   // Sort events by start time
   processedEvents.sort((a, b) => {
-    const dateCompare = new Date(a.currentDate).getTime() - new Date(b.currentDate).getTime();
+    const dateCompare = new BerlinDate(a.currentDate).getTime() - new BerlinDate(b.currentDate).getTime();
     if (dateCompare !== 0) return dateCompare;
     return a.startTime.localeCompare(b.startTime);
   });
@@ -155,7 +157,7 @@ const Schedule: FC<ScheduleProps> = ({ events }) => {
               <div className="absolute -left-10 sm:-left-12 top-0 bottom-0">
                 {Array.from({ length: TOTAL_DAYS }).map((_, dayIndex) =>
                   Array.from({ length: 24 }).map((_, hour) => {
-                    const date = new Date(START_DATE);
+                    const date = BerlinDate.from(START_DATE);
                     date.setDate(date.getDate() + dayIndex);
 
                     // Skip rendering 23:00 and 01:00
@@ -192,7 +194,7 @@ const Schedule: FC<ScheduleProps> = ({ events }) => {
               <div className="absolute -right-12 top-0 bottom-0">
                 {Array.from({ length: TOTAL_DAYS }).map((_, dayIndex) =>
                   Array.from({ length: 24 }).map((_, hour) => {
-                    const date = new Date(START_DATE);
+                    const date = BerlinDate.from(START_DATE);
                     date.setDate(date.getDate() + dayIndex);
 
                     // Skip rendering 23:00 and 01:00
@@ -227,7 +229,7 @@ const Schedule: FC<ScheduleProps> = ({ events }) => {
 
               {/* Events */}
               {processedEvents.map((event, index) => {
-                const eventDate = new Date(event.currentDate);
+                const eventDate = new BerlinDate(event.currentDate);
                 const daysSinceStart = Math.floor((eventDate.getTime() - START_DATE.getTime()) / (1000 * 60 * 60 * 24));
                 const topPosition = daysSinceStart * CHUNKS_PER_DAY * CHUNK_HEIGHT;
 

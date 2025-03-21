@@ -1,6 +1,7 @@
 import { FC } from "react";
 import { EventType } from "./Schedule";
 import Event from "../../components/Event";
+import { BerlinDate } from "@/utils/BerlinDate";
 
 interface DaysProps {
   events: EventType[];
@@ -9,10 +10,10 @@ interface DaysProps {
 const Days: FC<DaysProps> = ({ events }) => {
   // Split multi-day events into separate day events
   const splitEvents = events.flatMap((event) => {
-    const startDate = new Date(event.startDate);
+    const startDate = new BerlinDate(event.startDate);
 
     return Array.from({ length: event.totalDays }, (_, index) => {
-      const currentDate = new Date(startDate);
+      const currentDate = BerlinDate.from(startDate);
       currentDate.setDate(currentDate.getDate() + index);
 
       // Get the start and end times for this day from dailySchedule
@@ -30,8 +31,8 @@ const Days: FC<DaysProps> = ({ events }) => {
 
   // Sort events chronologically
   const sortedEvents = splitEvents.sort((a, b) => {
-    const dateA = new Date(`${a.currentDate.split("T")[0]}T${a.startTime}`);
-    const dateB = new Date(`${b.currentDate.split("T")[0]}T${b.startTime}`);
+    const dateA = new BerlinDate(`${a.currentDate.split("T")[0]}T${a.startTime}`);
+    const dateB = new BerlinDate(`${b.currentDate.split("T")[0]}T${b.startTime}`);
     return dateA.getTime() - dateB.getTime();
   });
 
@@ -48,7 +49,7 @@ const Days: FC<DaysProps> = ({ events }) => {
   return (
     <div className="w-full max-w-4xl mx-auto space-y-12 px-2">
       {Object.entries(eventsByDate).map(([date, dateEvents]) => {
-        const displayDate = new Date(date);
+        const displayDate = new BerlinDate(date);
         return (
           <div key={date} className="space-y-6">
             <div className="sticky top-16 z-10 -mx-4 px-4 py-2 bg-black/80 backdrop-blur-sm">

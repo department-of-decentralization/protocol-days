@@ -6,6 +6,7 @@ import { EventType } from "@/app/views/Schedule";
 import { useEffect, useState } from "react";
 import { LuCalendarPlus } from "react-icons/lu";
 import { SiMatrix } from "react-icons/si";
+import { BerlinDate } from "@/utils/BerlinDate";
 
 interface Question {
   id: string;
@@ -45,9 +46,9 @@ function transformEvents(data: ResponseData): EventType[] {
     eventName: String(event["Event Name"] || ""),
     startDate: String(event["Event Start Date"] || ""),
     endDate: (() => {
-      const startDate = new Date(String(event["Event Start Date"]) || "");
+      const startDate = new BerlinDate(String(event["Event Start Date"]) || "");
       const days = Number(event["Number of Days"]) || 1;
-      const endDate = new Date(startDate);
+      const endDate = BerlinDate.from(startDate);
       endDate.setDate(endDate.getDate() + days - 1);
       return endDate.toISOString();
     })(),
@@ -77,7 +78,7 @@ function transformEvents(data: ResponseData): EventType[] {
   transformedEvents.sort((a, b) => {
     if (!a.submissionTime) return 1; // If a has no submission time, put it at the end
     if (!b.submissionTime) return -1; // If b has no submission time, put it at the end
-    return new Date(a.submissionTime).getTime() - new Date(b.submissionTime).getTime();
+    return new BerlinDate(a.submissionTime).getTime() - new BerlinDate(b.submissionTime).getTime();
   });
 
   return transformedEvents as EventType[];

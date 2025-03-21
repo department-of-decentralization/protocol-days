@@ -1,6 +1,7 @@
 import { FC } from "react";
 import { EventType } from "./Schedule";
 import EventCard from "@/components/EventCard";
+import { BerlinDate } from "@/utils/BerlinDate";
 
 interface EventsViewProps {
   events: EventType[];
@@ -10,7 +11,7 @@ const EventsView: FC<EventsViewProps> = ({ events }) => {
   // Format events with date information without sorting
   // console.log("All events:", events);
   const formattedEvents = events.map((event) => {
-    const startDate = new Date(event.startDate);
+    const startDate = new BerlinDate(event.startDate);
 
     return {
       ...event,

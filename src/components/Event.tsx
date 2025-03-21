@@ -8,6 +8,7 @@ import { LuCalendarPlus } from "react-icons/lu";
 import { IoChevronDown, IoChevronUp } from "react-icons/io5";
 import { EventTypeIcon, getBadgeClasses } from "@/constants/eventTypes";
 import Image from "next/image";
+import { BerlinDate } from "@/utils/BerlinDate";
 
 interface EventProps {
   event: EventType & {
@@ -137,16 +138,16 @@ const Event: FC<EventProps> = ({ event, uncollapsible = false, listView = false,
                 )}
                 {/* Daily schedule display */}
                 {listView && event.dailySchedule && event.dailySchedule.length > 0 && (
-                  <div className="mt-2 text-sm text-gray-400">
+                  <div className="mt-2 text-sm text-gray-400 prose prose-invert prose-sm max-w-none">
                     {event.dailySchedule.slice(0, event.totalDays).map((day, index) => {
                       // Create a new date by adding index days to the current date
-                      const dayDate = new Date(event.currentDate);
+                      const dayDate = new BerlinDate(event.currentDate);
                       dayDate.setDate(dayDate.getDate() + index);
 
                       return (
                         <div key={index} className="flex items-center gap-2 mb-1">
                           <span>
-                            {new Date(dayDate).getDate()}{" "}
+                            {dayDate.getDate()}{" "}
                             {dayDate.toLocaleDateString("en-US", {
                               month: "long",
                             })}
@@ -187,7 +188,7 @@ const Event: FC<EventProps> = ({ event, uncollapsible = false, listView = false,
                   </div>
                   {uncollapsible && (
                     <div className="text-sm text-gray-500">
-                      {new Date(event.currentDate).toLocaleDateString("en-US", {
+                      {new BerlinDate(event.currentDate).toLocaleDateString("en-US", {
                         weekday: "long",
                         month: "long",
                         day: "numeric",
