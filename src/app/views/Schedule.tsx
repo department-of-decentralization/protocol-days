@@ -258,7 +258,13 @@ const Schedule: FC<ScheduleProps> = ({ events }) => {
                   >
                     <div className="h-full [writing-mode:vertical-rl] whitespace-normal flex items-center justify-center gap-1 sm:gap-2 p-1 sm:p-2">
                       <span className="text-sm sm:text-base font-medium -rotate-180">
-                        <span className="text-[10px] sm:text-sm">{event.eventName}</span>
+                        <span
+                          className={`text-[10px] sm:text-sm line-clamp-4 ${
+                            event.eventName.length > 30 ? "text-[8px] sm:text-xs" : ""
+                          }`}
+                        >
+                          {event.eventName}
+                        </span>
                         <span className="text-[8px] sm:text-xs text-gray-400">
                           {event.totalDays > 1 && ` - (Day ${event.dayIndex}/${event.totalDays})`}
                         </span>
@@ -267,7 +273,11 @@ const Schedule: FC<ScheduleProps> = ({ events }) => {
                         <Image
                           src={event.logo[0].url}
                           alt=""
-                          className="w-[25px] h-[25px] sm:w-[40px] sm:h-[40px] object-contain rounded -rotate-90 mt-1"
+                          className={`object-contain rounded -rotate-90 mt-1 ${
+                            event.eventName.length > 30
+                              ? "w-[20px] h-[20px] sm:w-[30px] sm:h-[30px]"
+                              : "w-[25px] h-[25px] sm:w-[40px] sm:h-[40px]"
+                          }`}
                           width={40}
                           height={40}
                         />
