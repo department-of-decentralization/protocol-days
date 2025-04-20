@@ -74,7 +74,13 @@ const EventCard: FC<EventCardProps> = ({ event }) => {
           </div>
 
           {/* Event Title */}
-          <h3 className="font-bold text-white text-xl mb-2 line-clamp-2 text-center">{event.eventName}</h3>
+          <h3
+            className={`font-bold text-white mb-2 line-clamp-3 text-center ${
+              event.eventName.length > 30 ? "text-base" : "text-xl"
+            }`}
+          >
+            {event.eventName}
+          </h3>
 
           {/* Date Range */}
           <div className="text-gray-400 text-center mb-3">{dateRange}</div>
