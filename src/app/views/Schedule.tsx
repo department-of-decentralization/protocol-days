@@ -142,18 +142,8 @@ const Schedule: FC<ScheduleProps> = ({ events }) => {
 
   // Sort events by start time and duration (longer events first)
   processedEvents.sort((a, b) => {
-    const dateCompare = new BerlinDate(a.currentDate).getTime() - new BerlinDate(b.currentDate).getTime();
-    if (dateCompare !== 0) return dateCompare;
-
-    // If same date, compare start times
-    if (a.startTime !== b.startTime) {
-      return a.startTime.localeCompare(b.startTime);
-    }
-
-    // If same start time, put longer events first
-    const aDuration = getEventDurationInMinutes(a);
-    const bDuration = getEventDurationInMinutes(b);
-    return bDuration - aDuration;
+    // Only sort by date to preserve original order within each day
+    return new BerlinDate(a.currentDate).getTime() - new BerlinDate(b.currentDate).getTime();
   });
 
   // Assign columns to events
