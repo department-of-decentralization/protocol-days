@@ -70,19 +70,6 @@ const Schedule: FC<ScheduleProps> = ({ events }) => {
     const [endHour] = endTime.split(":").map(Number);
     return endHour < startHour;
   };
-
-  // Helper function to get event duration in minutes, handling next day events
-  const getEventDurationInMinutes = (event: ProcessedEvent) => {
-    const [startHours, startMinutes] = event.startTime.split(":").map(Number);
-    const [endHours, endMinutes] = event.endTime.split(":").map(Number);
-
-    if (isNextDayEvent(event.startTime, event.endTime)) {
-      // If event ends next day, add 24 hours to end time
-      return (endHours + 24) * 60 + endMinutes - (startHours * 60 + startMinutes);
-    }
-    return endHours * 60 + endMinutes - (startHours * 60 + startMinutes);
-  };
-
   // Split multi-day events into separate day events
   const splitEvents = events.flatMap((event) => {
     const startDate = new BerlinDate(event.startDate);
