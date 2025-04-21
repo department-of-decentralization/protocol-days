@@ -40,9 +40,11 @@ interface ScheduleProps {
 
 const START_DATE = new BerlinDate("2025-06-08");
 const END_DATE = new BerlinDate("2025-06-22");
+const DAY_START_HOUR = 6; // Start at 6am
 const MINUTES_PER_CHUNK = 15;
 const CHUNK_HEIGHT = 10; // height in pixels for each 15-min chunk
-const MINUTES_PER_DAY = 24 * 60;
+const HOURS_PER_DAY = 18; // Display 18 hours (6am to midnight)
+const MINUTES_PER_DAY = HOURS_PER_DAY * 60;
 const CHUNKS_PER_DAY = MINUTES_PER_DAY / MINUTES_PER_CHUNK;
 const TOTAL_DAYS = Math.ceil((END_DATE.getTime() - START_DATE.getTime()) / (1000 * 60 * 60 * 24)) + 1;
 const TIMELINE_HEIGHT = TOTAL_DAYS * CHUNKS_PER_DAY * CHUNK_HEIGHT;
@@ -73,14 +75,16 @@ const Schedule: FC<ScheduleProps> = ({ events }) => {
 
       // Get the start and end times for this day from dailySchedule
       const daySchedule = event.dailySchedule[index];
+      const startTime = daySchedule?.startTime || "06:00"; // Default to 6am if not specified
+      const endTime = daySchedule?.endTime || "23:59"; // Default to 23:59 if not specified
 
       return {
         ...event,
         dayIndex: index + 1,
         totalDays: days,
         currentDate: currentDate.toISOString(),
-        startTime: daySchedule?.startTime || "00:00", // Default to 00:00 AM if not specified
-        endTime: daySchedule?.endTime || "23:59", // Default to 23:59 PM if not specified
+        startTime: startTime,
+        endTime: endTime,
       };
     });
   });
@@ -156,12 +160,13 @@ const Schedule: FC<ScheduleProps> = ({ events }) => {
               {/* Left Hour labels */}
               <div className="absolute -left-10 sm:-left-12 top-0 bottom-0">
                 {Array.from({ length: TOTAL_DAYS }).map((_, dayIndex) =>
-                  Array.from({ length: 24 }).map((_, hour) => {
+                  Array.from({ length: HOURS_PER_DAY }).map((_, hour) => {
                     const date = BerlinDate.from(START_DATE);
                     date.setDate(date.getDate() + dayIndex);
+                    const displayHour = hour + DAY_START_HOUR;
 
-                    // Skip rendering 23:00 and 01:00
-                    if (hour === 23 || hour === 1) return null;
+                    // Skip rendering some hours to avoid clutter
+                    if (displayHour === 23 || displayHour === DAY_START_HOUR + 1) return null;
 
                     return (
                       <div
@@ -182,7 +187,7 @@ const Schedule: FC<ScheduleProps> = ({ events }) => {
                             </span>
                           </span>
                         ) : (
-                          `${hour.toString().padStart(2, "0")}:00`
+                          `${displayHour.toString().padStart(2, "0")}:00`
                         )}
                       </div>
                     );
@@ -237,12 +242,16 @@ const Schedule: FC<ScheduleProps> = ({ events }) => {
                 const [hours, minutes] = event.startTime.split(":").map(Number);
                 const [endHours, endMinutes] = event.endTime.split(":").map(Number);
 
-                const minutesSinceMidnight = hours * 60 + minutes;
-                const endMinutesSinceMidnight = endHours * 60 + endMinutes;
-                const durationInMinutes = endMinutesSinceMidnight - minutesSinceMidnight;
+                // Adjust for 6am start
+                const minutesSinceDayStart = (hours - DAY_START_HOUR) * 60 + minutes;
+                const endMinutesSinceDayStart = (endHours - DAY_START_HOUR) * 60 + endMinutes;
+                const durationInMinutes = endMinutesSinceDayStart - minutesSinceDayStart;
 
-                const chunkOffset = Math.floor(minutesSinceMidnight / MINUTES_PER_CHUNK) * CHUNK_HEIGHT;
+                const chunkOffset = Math.floor(minutesSinceDayStart / MINUTES_PER_CHUNK) * CHUNK_HEIGHT;
                 const eventHeight = Math.floor(durationInMinutes / MINUTES_PER_CHUNK) * CHUNK_HEIGHT;
+
+                // Skip events that end before 6am or start after midnight
+                if (hours < DAY_START_HOUR || endHours > 24) return null;
 
                 return (
                   <div
