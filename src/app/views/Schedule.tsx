@@ -32,6 +32,7 @@ export interface ProcessedEvent extends Omit<EventType, "startDate" | "endDate">
   startTime: string;
   endTime: string;
   column?: number;
+  isNextDayEvent: boolean;
 }
 
 interface ScheduleProps {
@@ -63,6 +64,25 @@ const Schedule: FC<ScheduleProps> = ({ events }) => {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
+  // Helper function to check if end time is on the next day
+  const isNextDayEvent = (startTime: string, endTime: string) => {
+    const [startHour] = startTime.split(":").map(Number);
+    const [endHour] = endTime.split(":").map(Number);
+    return endHour < startHour;
+  };
+
+  // Helper function to get event duration in minutes, handling next day events
+  const getEventDurationInMinutes = (event: ProcessedEvent) => {
+    const [startHours, startMinutes] = event.startTime.split(":").map(Number);
+    const [endHours, endMinutes] = event.endTime.split(":").map(Number);
+
+    if (isNextDayEvent(event.startTime, event.endTime)) {
+      // If event ends next day, add 24 hours to end time
+      return (endHours + 24) * 60 + endMinutes - (startHours * 60 + startMinutes);
+    }
+    return endHours * 60 + endMinutes - (startHours * 60 + startMinutes);
+  };
+
   // Split multi-day events into separate day events
   const splitEvents = events.flatMap((event) => {
     const startDate = new BerlinDate(event.startDate);
@@ -75,16 +95,28 @@ const Schedule: FC<ScheduleProps> = ({ events }) => {
 
       // Get the start and end times for this day from dailySchedule
       const daySchedule = event.dailySchedule[index];
-      const startTime = daySchedule?.startTime || "06:00"; // Default to 6am if not specified
-      const endTime = daySchedule?.endTime || "23:59"; // Default to 23:59 if not specified
+      let startTime = daySchedule?.startTime || "06:00";
+      let endTime = daySchedule?.endTime || "23:59";
+
+      // If this is a next-day event
+      if (isNextDayEvent(startTime, endTime)) {
+        if (index === 0) {
+          // First day: keep start time, end at midnight
+          endTime = "23:59";
+        } else if (index === 1) {
+          // Second day: start at midnight, keep end time
+          startTime = "00:00";
+        }
+      }
 
       return {
         ...event,
         dayIndex: index + 1,
         totalDays: days,
         currentDate: currentDate.toISOString(),
-        startTime: startTime,
-        endTime: endTime,
+        startTime,
+        endTime,
+        isNextDayEvent: isNextDayEvent(startTime, endTime),
       };
     });
   });
@@ -108,11 +140,20 @@ const Schedule: FC<ScheduleProps> = ({ events }) => {
     endDate: new BerlinDate(event.endDate),
   })) as ProcessedEvent[];
 
-  // Sort events by start time
+  // Sort events by start time and duration (longer events first)
   processedEvents.sort((a, b) => {
     const dateCompare = new BerlinDate(a.currentDate).getTime() - new BerlinDate(b.currentDate).getTime();
     if (dateCompare !== 0) return dateCompare;
-    return a.startTime.localeCompare(b.startTime);
+
+    // If same date, compare start times
+    if (a.startTime !== b.startTime) {
+      return a.startTime.localeCompare(b.startTime);
+    }
+
+    // If same start time, put longer events first
+    const aDuration = getEventDurationInMinutes(a);
+    const bDuration = getEventDurationInMinutes(b);
+    return bDuration - aDuration;
   });
 
   // Assign columns to events
@@ -244,19 +285,24 @@ const Schedule: FC<ScheduleProps> = ({ events }) => {
 
                 // Adjust for 6am start
                 const minutesSinceDayStart = (hours - DAY_START_HOUR) * 60 + minutes;
-                const endMinutesSinceDayStart = (endHours - DAY_START_HOUR) * 60 + endMinutes;
+                const endMinutesSinceDayStart = isNextDayEvent(event.startTime, event.endTime)
+                  ? (endHours + 24 - DAY_START_HOUR) * 60 + endMinutes
+                  : (endHours - DAY_START_HOUR) * 60 + endMinutes;
+
                 const durationInMinutes = endMinutesSinceDayStart - minutesSinceDayStart;
 
                 const chunkOffset = Math.floor(minutesSinceDayStart / MINUTES_PER_CHUNK) * CHUNK_HEIGHT;
                 const eventHeight = Math.floor(durationInMinutes / MINUTES_PER_CHUNK) * CHUNK_HEIGHT;
 
-                // Skip events that end before 6am or start after midnight
-                if (hours < DAY_START_HOUR || endHours > 24) return null;
+                // Skip events that end before 6am
+                if (hours < DAY_START_HOUR && !event.isNextDayEvent) return null;
 
                 return (
                   <div
                     key={`${event.eventName}-${index}`}
-                    className={`absolute p-2 rounded bg-gray-900 border border-gray-700 flex items-center justify-center cursor-pointer hover:border-primary-500 transition-colors`}
+                    className={`absolute p-2 rounded bg-gray-900 border border-gray-700 flex items-center justify-center cursor-pointer hover:border-primary-500 transition-colors ${
+                      event.isNextDayEvent ? "border-primary-500" : ""
+                    }`}
                     onClick={() => setSelectedEvent(event)}
                     style={{
                       top: `${topPosition + chunkOffset}px`,
