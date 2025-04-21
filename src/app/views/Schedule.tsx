@@ -39,7 +39,7 @@ interface ScheduleProps {
   events: EventType[];
 }
 
-const START_DATE = new BerlinDate("2025-06-08");
+const START_DATE = new BerlinDate("2025-06-07");
 const END_DATE = new BerlinDate("2025-06-22");
 const DAY_START_HOUR = 6; // Start at 6am
 const MINUTES_PER_CHUNK = 15;
@@ -209,7 +209,7 @@ const Schedule: FC<ScheduleProps> = ({ events }) => {
                         }}
                       >
                         {hour === 0 ? (
-                          <span className="flex flex-col items-end text-right">
+                          <span className={`flex flex-col items-end text-right ${dayIndex === 0 ? "mt-16" : ""}`}>
                             <span className="text-gray-400 text-[9px] sm:text-xs">
                               {date.toLocaleDateString("en-US", { weekday: "short" })}
                             </span>
