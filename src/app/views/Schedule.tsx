@@ -152,183 +152,188 @@ const Schedule: FC<ScheduleProps> = ({ events }) => {
 
   return (
     <>
-      <div className="flex max-w-6xl mx-auto" style={{ width: `${totalWidth + 50}px` }}>
-        {/* Date and time labels */}
-        <div className="w-12 flex-shrink-0 bg-black h-full">
-          {Array.from({ length: TOTAL_DAYS }).map((_, dayIndex) => {
-            return <div key={dayIndex} style={{ height: `${CHUNKS_PER_DAY * CHUNK_HEIGHT}px` }} className="relative" />;
-          })}
-        </div>
-
-        {/* Timeline */}
-        <div className="flex-grow relative border-l border-gray-800">
-          {/* Time chunk dividers */}
-          {Array.from({ length: TOTAL_DAYS * CHUNKS_PER_DAY }).map((_, index) => (
-            <div
-              key={index}
-              className="absolute w-full border-b border-gray-500"
-              style={{
-                top: `${index * CHUNK_HEIGHT}px`,
-                borderBottomStyle: index % 4 === 0 ? "solid" : "dotted",
-                opacity: index % 4 === 0 ? 0.3 : 0.2,
-              }}
-            />
-          ))}
-
-          {/* Left Hour labels */}
-          <div className="absolute -left-10 sm:-left-12 top-0 bottom-0">
-            {Array.from({ length: TOTAL_DAYS }).map((_, dayIndex) =>
-              Array.from({ length: HOURS_PER_DAY }).map((_, hour) => {
-                const date = BerlinDate.from(START_DATE);
-                date.setDate(date.getDate() + dayIndex);
-                const displayHour = hour + DAY_START_HOUR;
-
-                // Skip rendering some hours to avoid clutter
-                if (displayHour === 23 || displayHour === DAY_START_HOUR + 1) return null;
-
-                return (
-                  <div
-                    key={`${dayIndex}-${hour}`}
-                    className="absolute text-[9px] sm:text-xs text-gray-500"
-                    style={{
-                      top: `${(dayIndex * CHUNKS_PER_DAY + hour * 4) * CHUNK_HEIGHT}px`,
-                      transform: "translateY(-50%)",
-                    }}
-                  >
-                    {hour === 0 ? (
-                      <span className={`flex flex-col items-end text-right ${dayIndex === 0 ? "mt-16" : ""}`}>
-                        <span className="text-gray-400 text-[9px] sm:text-xs">
-                          {date.toLocaleDateString("en-US", { weekday: "short" })}
-                        </span>
-                        <span className="font-bold text-white text-sm sm:text-xl -mt-1">
-                          {date.toLocaleDateString("en-US", { month: "short", day: "numeric" })}
-                        </span>
-                      </span>
-                    ) : (
-                      `${displayHour.toString().padStart(2, "0")}:00`
-                    )}
-                  </div>
-                );
-              })
-            )}
+      <div className="overflow-x-auto">
+        <div className="flex max-w-6xl" style={{ width: `${totalWidth + 25}px` }}>
+          {/* Date and time labels */}
+          <div className="w-12 flex-shrink-0 bg-black h-full">
+            {Array.from({ length: TOTAL_DAYS }).map((_, dayIndex) => {
+              return (
+                <div key={dayIndex} style={{ height: `${CHUNKS_PER_DAY * CHUNK_HEIGHT}px` }} className="relative" />
+              );
+            })}
           </div>
 
-          {/* Right Hour labels */}
-          <div className="absolute -right-12 top-0 bottom-0">
-            {Array.from({ length: TOTAL_DAYS }).map((_, dayIndex) =>
-              Array.from({ length: 24 }).map((_, hour) => {
-                const date = BerlinDate.from(START_DATE);
-                date.setDate(date.getDate() + dayIndex);
-
-                // Skip rendering 23:00 and 01:00
-                if (hour === 23 || hour === 1) return null;
-
-                return (
-                  <div
-                    key={`${dayIndex}-${hour}`}
-                    className="absolute text-[9px] sm:text-xs text-gray-500"
-                    style={{
-                      top: `${(dayIndex * CHUNKS_PER_DAY + hour * 4) * CHUNK_HEIGHT}px`,
-                      transform: "translateY(-50%)",
-                    }}
-                  >
-                    {hour === 0 ? (
-                      <span className="flex flex-col items-start text-left">
-                        <span className="text-gray-400 text-sm">
-                          {date.toLocaleDateString("en-US", { weekday: "short" })}
-                        </span>
-                        <span className="font-bold text-white text-xl -mt-1">
-                          {date.toLocaleDateString("en-US", { month: "short", day: "numeric" })}
-                        </span>
-                      </span>
-                    ) : (
-                      `${hour.toString().padStart(2, "0")}:00`
-                    )}
-                  </div>
-                );
-              })
-            )}
-          </div>
-
-          {/* Events */}
-          {processedEvents.map((event, index) => {
-            const eventDate = new BerlinDate(event.currentDate);
-            const daysSinceStart = Math.floor((eventDate.getTime() - START_DATE.getTime()) / (1000 * 60 * 60 * 24));
-            const topPosition = daysSinceStart * CHUNKS_PER_DAY * CHUNK_HEIGHT;
-
-            // Calculate position based on time
-            const [hours, minutes] = event.startTime.split(":").map(Number);
-            const [endHours, endMinutes] = event.endTime.split(":").map(Number);
-
-            // Adjust for 6am start
-            const minutesSinceDayStart = (hours - DAY_START_HOUR) * 60 + minutes;
-            const endMinutesSinceDayStart = isNextDayEvent(event.startTime, event.endTime)
-              ? (endHours + 24 - DAY_START_HOUR) * 60 + endMinutes
-              : (endHours - DAY_START_HOUR) * 60 + endMinutes;
-
-            const durationInMinutes = endMinutesSinceDayStart - minutesSinceDayStart;
-
-            const chunkOffset = Math.floor(minutesSinceDayStart / MINUTES_PER_CHUNK) * CHUNK_HEIGHT;
-            const eventHeight = Math.floor(durationInMinutes / MINUTES_PER_CHUNK) * CHUNK_HEIGHT;
-
-            // Skip events that end before 6am
-            if (hours < DAY_START_HOUR && !event.isNextDayEvent) return null;
-
-            return (
+          {/* Timeline */}
+          <div className="flex-grow relative border-l border-gray-800">
+            {/* Time chunk dividers */}
+            {Array.from({ length: TOTAL_DAYS * CHUNKS_PER_DAY }).map((_, index) => (
               <div
-                key={`${event.eventName}-${index}`}
-                className={`absolute p-2 rounded bg-gray-900 border border-gray-700 items-center justify-center cursor-pointer hover:border-primary-500 transition-colors ${
-                  event.isNextDayEvent ? "border-primary-500" : ""
-                }`}
-                onClick={() => setSelectedEvent(event)}
+                key={index}
+                className="absolute w-full border-b border-gray-500"
                 style={{
-                  top: `${topPosition + chunkOffset}px`,
-                  left: `${8 + (event.column || 0) * (eventWidth + EVENT_GAP)}px`,
-                  width: `${eventWidth}px`,
-                  height: `${eventHeight}px`,
+                  top: `${index * CHUNK_HEIGHT}px`,
+                  borderBottomStyle: index % 4 === 0 ? "solid" : "dotted",
+                  opacity: index % 4 === 0 ? 0.3 : 0.2,
                 }}
-              >
-                {/* Flip event width and height here because we'll rotate the text */}
+              />
+            ))}
+
+            {/* Left Hour labels */}
+            <div className="absolute -left-10 sm:-left-12 top-0 bottom-0">
+              {Array.from({ length: TOTAL_DAYS }).map((_, dayIndex) =>
+                Array.from({ length: HOURS_PER_DAY }).map((_, hour) => {
+                  const date = BerlinDate.from(START_DATE);
+                  date.setDate(date.getDate() + dayIndex);
+                  const displayHour = hour + DAY_START_HOUR;
+
+                  // Skip rendering some hours to avoid clutter
+                  if (displayHour === 23 || displayHour === DAY_START_HOUR + 1) return null;
+
+                  return (
+                    <div
+                      key={`${dayIndex}-${hour}`}
+                      className="absolute text-[9px] sm:text-xs text-gray-500"
+                      style={{
+                        top: `${(dayIndex * CHUNKS_PER_DAY + hour * 4) * CHUNK_HEIGHT}px`,
+                        transform: "translateY(-50%)",
+                      }}
+                    >
+                      {hour === 0 ? (
+                        <span className={`flex flex-col items-end text-right ${dayIndex === 0 ? "mt-16" : ""}`}>
+                          <span className="text-gray-400 text-[9px] sm:text-xs">
+                            {date.toLocaleDateString("en-US", { weekday: "short" })}
+                          </span>
+                          <span className="font-bold text-white text-sm sm:text-xl -mt-1">
+                            {date.toLocaleDateString("en-US", { month: "short", day: "numeric" })}
+                          </span>
+                        </span>
+                      ) : (
+                        `${displayHour.toString().padStart(2, "0")}:00`
+                      )}
+                    </div>
+                  );
+                })
+              )}
+            </div>
+
+            {/* Right Hour labels */}
+            <div className="absolute -right-12 top-0 bottom-0">
+              {Array.from({ length: TOTAL_DAYS }).map((_, dayIndex) =>
+                Array.from({ length: HOURS_PER_DAY }).map((_, hour) => {
+                  const date = BerlinDate.from(START_DATE);
+                  date.setDate(date.getDate() + dayIndex);
+                  const displayHour = hour + DAY_START_HOUR;
+
+                  // Skip rendering some hours to avoid clutter
+                  if (displayHour === 23 || displayHour === DAY_START_HOUR + 1) return null;
+
+                  return (
+                    <div
+                      key={`${dayIndex}-${hour}`}
+                      className="absolute text-[9px] sm:text-xs text-gray-500"
+                      style={{
+                        top: `${(dayIndex * CHUNKS_PER_DAY + hour * 4) * CHUNK_HEIGHT}px`,
+                        transform: "translateY(-50%)",
+                      }}
+                    >
+                      {hour === 0 ? (
+                        <span className={`flex flex-col items-start text-left ${dayIndex === 0 ? "mt-16" : ""}`}>
+                          <span className="text-gray-400 text-[9px] sm:text-xs">
+                            {date.toLocaleDateString("en-US", { weekday: "short" })}
+                          </span>
+                          <span className="font-bold text-white text-sm sm:text-xl -mt-1">
+                            {date.toLocaleDateString("en-US", { month: "short", day: "numeric" })}
+                          </span>
+                        </span>
+                      ) : (
+                        `${displayHour.toString().padStart(2, "0")}:00`
+                      )}
+                    </div>
+                  );
+                })
+              )}
+            </div>
+
+            {/* Events */}
+            {processedEvents.map((event, index) => {
+              const eventDate = new BerlinDate(event.currentDate);
+              const daysSinceStart = Math.floor((eventDate.getTime() - START_DATE.getTime()) / (1000 * 60 * 60 * 24));
+              const topPosition = daysSinceStart * CHUNKS_PER_DAY * CHUNK_HEIGHT;
+
+              // Calculate position based on time
+              const [hours, minutes] = event.startTime.split(":").map(Number);
+              const [endHours, endMinutes] = event.endTime.split(":").map(Number);
+
+              // Adjust for 6am start
+              const minutesSinceDayStart = (hours - DAY_START_HOUR) * 60 + minutes;
+              const endMinutesSinceDayStart = isNextDayEvent(event.startTime, event.endTime)
+                ? (endHours + 24 - DAY_START_HOUR) * 60 + endMinutes
+                : (endHours - DAY_START_HOUR) * 60 + endMinutes;
+
+              const durationInMinutes = endMinutesSinceDayStart - minutesSinceDayStart;
+
+              const chunkOffset = Math.floor(minutesSinceDayStart / MINUTES_PER_CHUNK) * CHUNK_HEIGHT;
+              const eventHeight = Math.floor(durationInMinutes / MINUTES_PER_CHUNK) * CHUNK_HEIGHT;
+
+              // Skip events that end before 6am
+              if (hours < DAY_START_HOUR && !event.isNextDayEvent) return null;
+
+              return (
                 <div
-                  className="p-2 flex items-center justify-center gap-2"
+                  key={`${event.eventName}-${index}`}
+                  className={`absolute p-2 rounded bg-gray-900 border border-gray-700 items-center justify-center cursor-pointer hover:border-primary-500 transition-colors ${
+                    event.isNextDayEvent ? "border-primary-500" : ""
+                  }`}
+                  onClick={() => setSelectedEvent(event)}
                   style={{
-                    width: eventHeight,
-                    height: eventWidth,
-                    overflow: "visible",
-                    transform: `rotate(-90deg) translate(-${eventHeight - 10}px, -10px)`,
-                    // translateY(${eventHeight}px)
-                    transformOrigin: "left top",
+                    top: `${topPosition + chunkOffset}px`,
+                    left: `${8 + (event.column || 0) * (eventWidth + EVENT_GAP)}px`,
+                    width: `${eventWidth}px`,
+                    height: `${eventHeight}px`,
                   }}
                 >
-                  {event.logo?.[0]?.url && (
-                    <Image
-                      src={event.logo[0].url}
-                      alt=""
-                      className={`object-contain rounded ${
-                        event.eventName.length > 30
-                          ? "w-[20px] h-[20px] sm:w-[30px] sm:h-[30px]"
-                          : "w-[25px] h-[25px] sm:w-[40px] sm:h-[40px]"
-                      }`}
-                      width={40}
-                      height={40}
-                    />
-                  )}
-                  <span className="text-sm sm:text-base font-medium flex flex-row gap-1 items-center flex-wrap">
-                    <span
-                      className={`text-[10px] sm:text-sm line-clamp-3 ${
-                        event.eventName.length > 30 ? "text-[8px] sm:text-xs" : ""
-                      }`}
-                    >
-                      {event.eventName}
+                  {/* Flip event width and height here because we'll rotate the text */}
+                  <div
+                    className="p-2 flex items-center justify-center gap-2"
+                    style={{
+                      width: eventHeight,
+                      height: eventWidth,
+                      overflow: "visible",
+                      transform: `rotate(-90deg) translate(-${eventHeight - 10}px, -10px)`,
+                      // translateY(${eventHeight}px)
+                      transformOrigin: "left top",
+                    }}
+                  >
+                    {event.logo?.[0]?.url && (
+                      <Image
+                        src={event.logo[0].url}
+                        alt=""
+                        className={`object-contain rounded ${
+                          event.eventName.length > 30
+                            ? "w-[20px] h-[20px] sm:w-[30px] sm:h-[30px]"
+                            : "w-[25px] h-[25px] sm:w-[40px] sm:h-[40px]"
+                        }`}
+                        width={40}
+                        height={40}
+                      />
+                    )}
+                    <span className="text-sm sm:text-base font-medium flex flex-row gap-1 items-center flex-wrap">
+                      <span
+                        className={`text-[10px] sm:text-sm line-clamp-3 ${
+                          event.eventName.length > 30 ? "text-[8px] sm:text-xs" : ""
+                        }`}
+                      >
+                        {event.eventName}
+                      </span>
+                      <span className="text-[8px] sm:text-xs text-gray-400">
+                        {event.totalDays > 1 && ` - (Day ${event.dayIndex}/${event.totalDays})`}
+                      </span>
                     </span>
-                    <span className="text-[8px] sm:text-xs text-gray-400">
-                      {event.totalDays > 1 && ` - (Day ${event.dayIndex}/${event.totalDays})`}
-                    </span>
-                  </span>
+                  </div>
                 </div>
-              </div>
-            );
-          })}
+              );
+            })}
+          </div>
         </div>
       </div>
 
