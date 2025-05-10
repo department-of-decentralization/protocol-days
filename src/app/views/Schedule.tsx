@@ -277,7 +277,7 @@ const Schedule: FC<ScheduleProps> = ({ events }) => {
                 return (
                   <div
                     key={`${event.eventName}-${index}`}
-                    className={`absolute p-2 rounded bg-gray-900 border border-gray-700 flex items-center justify-center cursor-pointer hover:border-primary-500 transition-colors ${
+                    className={`absolute p-2 rounded bg-gray-900 border border-gray-700 items-center justify-center cursor-pointer hover:border-primary-500 transition-colors ${
                       event.isNextDayEvent ? "border-primary-500" : ""
                     }`}
                     onClick={() => setSelectedEvent(event)}
@@ -288,10 +288,34 @@ const Schedule: FC<ScheduleProps> = ({ events }) => {
                       height: `${eventHeight}px`,
                     }}
                   >
-                    <div className="h-full [writing-mode:vertical-rl] whitespace-normal flex items-center justify-center gap-1 sm:gap-2 p-1 sm:p-2">
-                      <span className="text-sm sm:text-base font-medium -rotate-180">
+                    {/* Flip event width and height here because we'll rotate the text */}
+                    <div
+                      className="p-2 flex items-center justify-center gap-2"
+                      style={{
+                        width: eventHeight,
+                        height: eventWidth,
+                        overflow: "visible",
+                        transform: `rotate(-90deg) translate(-${eventHeight - 10}px, -10px)`,
+                        // translateY(${eventHeight}px)
+                        transformOrigin: "left top",
+                      }}
+                    >
+                      {event.logo?.[0]?.url && (
+                        <Image
+                          src={event.logo[0].url}
+                          alt=""
+                          className={`object-contain rounded ${
+                            event.eventName.length > 30
+                              ? "w-[20px] h-[20px] sm:w-[30px] sm:h-[30px]"
+                              : "w-[25px] h-[25px] sm:w-[40px] sm:h-[40px]"
+                          }`}
+                          width={40}
+                          height={40}
+                        />
+                      )}
+                      <span className="text-sm sm:text-base font-medium flex flex-row gap-1 items-center flex-wrap">
                         <span
-                          className={`text-[10px] sm:text-sm line-clamp-4 ${
+                          className={`text-[10px] sm:text-sm line-clamp-3 ${
                             event.eventName.length > 30 ? "text-[8px] sm:text-xs" : ""
                           }`}
                         >
@@ -301,19 +325,6 @@ const Schedule: FC<ScheduleProps> = ({ events }) => {
                           {event.totalDays > 1 && ` - (Day ${event.dayIndex}/${event.totalDays})`}
                         </span>
                       </span>
-                      {event.logo?.[0]?.url && (
-                        <Image
-                          src={event.logo[0].url}
-                          alt=""
-                          className={`object-contain rounded -rotate-90 mt-1 ${
-                            event.eventName.length > 30
-                              ? "w-[20px] h-[20px] sm:w-[30px] sm:h-[30px]"
-                              : "w-[25px] h-[25px] sm:w-[40px] sm:h-[40px]"
-                          }`}
-                          width={40}
-                          height={40}
-                        />
-                      )}
                     </div>
                   </div>
                 );
