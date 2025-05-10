@@ -48,7 +48,7 @@ const HOURS_PER_DAY = 18; // Display 18 hours (6am to midnight)
 const MINUTES_PER_DAY = HOURS_PER_DAY * 60;
 const CHUNKS_PER_DAY = MINUTES_PER_DAY / MINUTES_PER_CHUNK;
 const TOTAL_DAYS = Math.ceil((END_DATE.getTime() - START_DATE.getTime()) / (1000 * 60 * 60 * 24)) + 1;
-const TIMELINE_HEIGHT = TOTAL_DAYS * CHUNKS_PER_DAY * CHUNK_HEIGHT;
+// const TIMELINE_HEIGHT = TOTAL_DAYS * CHUNKS_PER_DAY * CHUNK_HEIGHT;
 const EVENT_GAP = 8; // pixels between overlapping events
 
 const Schedule: FC<ScheduleProps> = ({ events }) => {
