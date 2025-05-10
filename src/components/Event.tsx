@@ -206,7 +206,7 @@ const Event: FC<EventProps> = ({ event, uncollapsible = false, listView = false,
       {isExpanded && (
         <div className="mt-4">
           {/* Description Section */}
-          <div className="mt-2 text-gray-400 prose prose-invert prose-sm max-w-none">
+          <div className="mt-2 text-gray-400 prose prose-invert prose-sm max-w-none max-h-[200px] overflow-y-auto">
             <ReactMarkdown>{event.description}</ReactMarkdown>
           </div>
 

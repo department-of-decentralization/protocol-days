@@ -340,7 +340,7 @@ const Schedule: FC<ScheduleProps> = ({ events }) => {
       {/* Modal */}
       {selectedEvent && (
         <div
-          className="fixed inset-0 bg-black/80 flex items-center justify-center p-4 z-50"
+          className="fixed inset-0 bg-black/80 flex items-center justify-center px-4  z-50"
           onClick={() => setSelectedEvent(null)}
         >
           <div className="relative w-full max-w-2xl max-h-[90vh] overflow-y-auto" onClick={(e) => e.stopPropagation()}>
