@@ -13,8 +13,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Berlin Blockchain Week 2025",
-  description: "The sixth edition of the Berlin Blockchain Week",
+  title: "Protocol days 2025",
+  description: "The first edition the Berlin Blockchain Days",
 };
 
 export default function RootLayout({
