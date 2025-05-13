@@ -18,6 +18,7 @@ interface Question {
 interface Submission {
   submissionId: string;
   submissionTime: string;
+  startedAt: string;
   questions: Question[];
 }
 
@@ -32,6 +33,7 @@ function transformEvents(data: ResponseData): EventType[] {
   const flattenedEvents = data.responses.map((submission) => {
     const event: Record<string, string | number | boolean | { url: string; filename: string }[] | null> = {
       submissionTime: submission.submissionTime,
+      startedAt: submission.startedAt,
     };
 
     submission.questions.forEach((question) => {
@@ -72,13 +74,14 @@ function transformEvents(data: ResponseData): EventType[] {
       endTime: event[`Day ${i + 1} - End Time`] ? String(event[`Day ${i + 1} - End Time`]) : null,
     })),
     submissionTime: String(event["submissionTime"] || ""),
+    startedAt: String(event["startedAt"] || ""),
   }));
 
-  // Sort events by submission time (newest first)
+  // Sort events by submission time (oldest first)
   transformedEvents.sort((a, b) => {
-    if (!a.submissionTime) return 1; // If a has no submission time, put it at the end
-    if (!b.submissionTime) return -1; // If b has no submission time, put it at the end
-    return new BerlinDate(a.submissionTime).getTime() - new BerlinDate(b.submissionTime).getTime();
+    if (!a.startedAt) return 1; // If a has no submission time, put it at the end
+    if (!b.startedAt) return -1; // If b has no submission time, put it at the end
+    return new BerlinDate(a.startedAt).getTime() - new BerlinDate(b.startedAt).getTime();
   });
 
   return transformedEvents as EventType[];
