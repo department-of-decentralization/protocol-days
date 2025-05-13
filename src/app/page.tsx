@@ -124,8 +124,8 @@ export default function Home() {
               priority
             />
             <div>
-              <h1 className="text-lg md:text-2xl font-bold text-white">Protocol Days 2025</h1>
-              <h2 className="text-sm md:text-base text-primary-500 font-medium">June 8-22</h2>
+              <h1 className="text-lg md:text-2xl font-bold text-white">Berlin Blockchain Week 2025</h1>
+              <h2 className="text-sm md:text-base text-primary-500 font-medium">June 7-22</h2>
             </div>
           </div>
           <div className="flex items-center gap-2 sm:gap-4">
