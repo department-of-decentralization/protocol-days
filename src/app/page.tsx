@@ -29,6 +29,7 @@ interface ResponseData {
 }
 
 function transformEvents(data: ResponseData): EventType[] {
+
   // Transform the responses into a flattened format
   const flattenedEvents = data.responses.map((submission) => {
     const event: Record<string, string | number | boolean | { url: string; filename: string }[] | null> = {
@@ -44,7 +45,7 @@ function transformEvents(data: ResponseData): EventType[] {
   });
 
   // Transform the flattened events into the format needed by Schedule component
-  const transformedEvents = flattenedEvents.map((event) => ({
+  const transformedEventsPreFilter = flattenedEvents.map((event) => ({
     eventName: String(event["Event Name"] || ""),
     startDate: String(event["Event Start Date"] || ""),
     endDate: (() => {
@@ -76,6 +77,11 @@ function transformEvents(data: ResponseData): EventType[] {
     submissionTime: String(event["submissionTime"] || ""),
     startedAt: String(event["startedAt"] || ""),
   }));
+
+  const transformedEvents = transformedEventsPreFilter.filter((submission) => {
+   const name = submission.eventName;
+   return !(submission.description.includes("germanblockchainweek") || name.includes("Telekom") || name.includes("Agents") || name.includes("Startup"));
+  });
 
   // Sort events by submission time (oldest first)
   transformedEvents.sort((a, b) => {
