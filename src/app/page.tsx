@@ -123,14 +123,14 @@ export default function Home() {
           <div className="flex items-center gap-2 md:gap-4">
             <Image
               src="/bbw25-logo.svg"
-              alt="Berlin Blockchain Week 2025 logo"
+              alt="Protocol Days 2025 logo"
               width={64}
               height={64}
               className="w-12 h-12 md:w-16 md:h-16"
               priority
             />
             <div>
-              <h1 className="text-lg md:text-2xl font-bold text-white">Berlin Blockchain Week 2025</h1>
+              <h1 className="text-lg md:text-2xl font-bold text-white">Protocol Days 2025</h1>
               <h2 className="text-sm md:text-base text-primary-500 font-medium">June 7-22</h2>
             </div>
           </div>
@@ -154,7 +154,7 @@ export default function Home() {
               <LuCalendarPlus className="w-5 h-5" />
             </a>
             <a
-              href="https://github.com/blockchainweek/2025"
+              href="https://github.com/department-of-decentralization/protocol-days"
               target="_blank"
               rel="noopener noreferrer"
               title="View the source code"
@@ -181,35 +181,10 @@ export default function Home() {
         <div>
           <div className="max-w-4xl mx-auto prose prose-invert text-sm text-left mb-4 flex flex-col gap-4">
             <p className="text-gray-300">
-              Berlin Blockchain Week (short BBW) is a decentralized community-organized initiative born in 2018. There
-              is no single owner: It is an agnostic movement based on the premise that self-organization is the backbone
-              of our ecosystem.
-            </p>
-            <p className="text-gray-300">
-              Berlin Blockchain Week is committed to reduce the noise from the market and focus on education,
-              collaboration and knowledge exchange. For an event to be accepted on the BBW calendar, it must takes place
-              in Berlin (no online events!) during the BBW dates, and be related to blockchain or adjacent fields.
-            </p>
-            <p className="text-gray-300">
-              Our concept is simple: keep it educational, be as cost-friendly for the community as you can and focus on
-              creating a welcoming and inclusive environment, so interested parties at any knowledge level feel
-              comfortable to join.
-            </p>
-            <p className="text-gray-300">
-              The BBW efforts are currently loosely coordinated by the{" "}
+              The Protocol Days 2025 website is currently maintained by the{" "}
               <a href="https://dod.ngo/" target="_blank" rel="noopener" className="text-primary-500 hover:underline">
-                Department of Decentralization
+                Department of Decentralization (DoD)
               </a>
-              . This includes hosting the BBW website and sharing relevant news about the week via the{" "}
-              <a
-                href="https://x.com/berblockweek"
-                target="_blank"
-                rel="noopener"
-                className="text-primary-500 hover:underline"
-              >
-                @berblockweek
-              </a>{" "}
-              Twitter account.
             </p>
           </div>
         </div>
