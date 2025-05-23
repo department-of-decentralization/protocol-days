@@ -80,7 +80,7 @@ function transformEvents(data: ResponseData): EventType[] {
 
   const transformedEvents = transformedEventsPreFilter.filter((submission) => {
    const name = submission.eventName;
-   return !(submission.description.includes("germanblockchainweek") || name.includes("Telekom") || name.includes("Agents") || name.includes("Startup") || name.includes("Growth"));
+   return !(submission.description.includes("germanblockchainweek") || name.includes("Telekom") || name.includes("Agents") || name.includes("Startup") || name.includes("Growth") || name.includes("VIP") || name.includes("Investors"));
   });
 
   // Sort events by submission time (oldest first)
